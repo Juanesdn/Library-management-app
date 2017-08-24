@@ -176,6 +176,8 @@ public class main extends javax.swing.JFrame {
             home inicio = new home();
             inicio.setVisible(true);
             this.dispose();
+        }else {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
         }
     }//GEN-LAST:event_jLabel1MouseClicked
 
