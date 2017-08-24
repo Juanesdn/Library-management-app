@@ -32,7 +32,6 @@ public class login extends javax.swing.JPanel{
         jSeparator2 = new javax.swing.JSeparator();
         contraseña = new javax.swing.JPasswordField();
         usuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -47,7 +46,7 @@ public class login extends javax.swing.JPanel{
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, 50));
 
         jLabel5.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 18)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon("/Users/Juanes/Downloads/icono.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icono.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, 210));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 540));
@@ -88,17 +87,6 @@ public class login extends javax.swing.JPanel{
             }
         });
         add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 200, 30));
-
-        jButton1.setBackground(new java.awt.Color(97, 212, 195));
-        jButton1.setText("Ingresar");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 130, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
@@ -120,28 +108,10 @@ public class login extends javax.swing.JPanel{
         contraseña.setText("");
     }//GEN-LAST:event_contraseñaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        char[] password = contraseña.getPassword();
-        
-        /** Comparo las contraseñas y los usuarios, si es correcto el usuario puede ir al inicio
-         * si no el programa le arroja un mensaje.
-         */
-        if (Arrays.equals(password, correctPass) && (usuario.getText().equals(user))){
-            home inicio = new home();
-            inicio.setVisible(true);
-        }else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-        }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField contraseña;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
