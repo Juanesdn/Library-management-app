@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Source;
+import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -106,6 +107,11 @@ public class main extends javax.swing.JFrame {
                 contraseñaActionPerformed(evt);
             }
         });
+        contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                contraseñaKeyPressed(evt);
+            }
+        });
         jPanel2.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 200, 30));
 
         usuario.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
@@ -118,6 +124,11 @@ public class main extends javax.swing.JFrame {
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuarioActionPerformed(evt);
+            }
+        });
+        usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usuarioKeyPressed(evt);
             }
         });
         jPanel2.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 200, 30));
@@ -167,6 +178,18 @@ public class main extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyPressed
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            contraseña.requestFocus();
+        }
+    }//GEN-LAST:event_usuarioKeyPressed
+
+    private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jLabel1.requestFocus();
+        }
+    }//GEN-LAST:event_contraseñaKeyPressed
 
     /**
      * @param args the command line arguments
