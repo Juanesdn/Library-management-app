@@ -28,9 +28,9 @@ public class home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        btn_usuarios = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        btn_registro = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,34 +39,52 @@ public class home extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(97, 212, 195));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Usuarios");
-        jLabel2.setOpaque(true);
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 160, 120));
+        btn_usuarios.setBackground(new java.awt.Color(255, 255, 255));
+        btn_usuarios.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        btn_usuarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_usuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/userIcon.png"))); // NOI18N
+        btn_usuarios.setText("Usuarios");
+        btn_usuarios.setOpaque(true);
+        btn_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_usuariosMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btn_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 160, 120));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Prestamos");
         jLabel3.setOpaque(true);
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 160, 120));
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Registro");
-        jLabel4.setOpaque(true);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 160, 120));
+        btn_registro.setBackground(new java.awt.Color(255, 255, 255));
+        btn_registro.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        btn_registro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_registro.setText("Registro");
+        btn_registro.setOpaque(true);
+        jPanel1.add(btn_registro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 160, 120));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Transacciones");
         jLabel5.setOpaque(true);
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 160, 120));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 530));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_usuariosMouseClicked
+        // TODO add your handling code here:
+        usuarios users = new usuarios();
+        users.setVisible(true);
+        users.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btn_usuariosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -104,9 +122,9 @@ public class home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel btn_registro;
+    private javax.swing.JLabel btn_usuarios;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

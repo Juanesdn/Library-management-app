@@ -171,10 +171,14 @@ public class main extends javax.swing.JFrame {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         char [] password = contraseña.getPassword();
-        System.out.println("prueba");
+        
+        /** Si el usuario y contraseña son correctos lo redirige al menu, si no
+         * le arroja un mensaje diciendo que algo está incorrecto.
+        */
         if (Arrays.equals(correctPass, password) && usuario.getText().equals(user)){
             home inicio = new home();
             inicio.setVisible(true);
+            inicio.setLocationRelativeTo(null);
             this.dispose();
         }else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
