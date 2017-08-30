@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Prestamos extends javax.swing.JFrame {
     public Vector nomUsuario = new Vector();
-    public Vector codUsuario = new Vector();
+    public Vector cdUsuario = new Vector();
     String Datos[] = new String[50];
     DefaultTableModel modelo = new DefaultTableModel();
     /**
@@ -25,11 +25,19 @@ public class Prestamos extends javax.swing.JFrame {
      */
     public Prestamos() {
         initComponents();
+        initComponents();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Tipo de usuario");
+        modelo.addColumn("Código");
+        modelo.addColumn("Prestamos");
+        modelo.addColumn("Libros Prestados");
         ButtonGroup clasificacion_usuarios = new ButtonGroup();
         clasificacion_usuarios.add(radbtn_empresa);
         clasificacion_usuarios.add(radbtn_persona);
         tabla_prestamos.setModel(modelo);
+        
     }
+    
     
 
     /**
@@ -54,10 +62,11 @@ public class Prestamos extends javax.swing.JFrame {
         txt_codigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_prestamos = new javax.swing.JTable();
-        btn_ingresar = new javax.swing.JPanel();
+        btn_Verificar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btn_ingresar1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        volver1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,27 +131,37 @@ public class Prestamos extends javax.swing.JFrame {
 
         tabla_prestamos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Codigo", "Prestamos", "Libros"
+                "Nombre", "Tipo de usuario", "Codigo", "Prestamos", "Libros"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabla_prestamos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 480, 220));
 
-        btn_ingresar.setBackground(new java.awt.Color(255, 255, 255));
-        btn_ingresar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btn_Verificar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_Verificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_VerificarMouseClicked(evt);
+            }
+        });
+        btn_Verificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Verificar Usuario");
-        btn_ingresar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+        btn_Verificar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
 
-        jPanel1.add(btn_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 200, 40));
+        jPanel1.add(btn_Verificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 200, 40));
 
         btn_ingresar1.setBackground(new java.awt.Color(255, 255, 255));
         btn_ingresar1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,6 +177,14 @@ public class Prestamos extends javax.swing.JFrame {
 
         jPanel1.add(btn_ingresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 200, 40));
 
+        volver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Back_64px.png"))); // NOI18N
+        volver1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volver1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(volver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,9 +193,7 @@ public class Prestamos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
         );
 
         pack();
@@ -201,11 +226,28 @@ public class Prestamos extends javax.swing.JFrame {
             Datos[2] = botonSeleccionado();
             modelo.addRow(Datos);
             nomUsuario.addElement(txt_nombre.getText());
-            codUsuario.addElement(Datos[1]);
+            cdUsuario.addElement(Datos[1]);
             txt_nombre.setText("");
             txt_nombre.requestFocus();
         }
     }//GEN-LAST:event_btn_ingresar1MouseClicked
+
+    private void volver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volver1MouseClicked
+        // TODO add your handling code here:
+        home menu = new home();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_volver1MouseClicked
+
+    private void btn_VerificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_VerificarMouseClicked
+        // TODO add your handling code here:
+        usuarios usuario =new usuarios();
+        if ( txt_nombre.getText() == "" || botonSeleccionado() == ""){
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+            txt_nombre.requestFocus();
+        }
+    }//GEN-LAST:event_btn_VerificarMouseClicked
  private String botonSeleccionado(){
         String btn_seleccionado = "";
         if (radbtn_persona.isSelected()){
@@ -251,7 +293,7 @@ public class Prestamos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btn_ingresar;
+    private javax.swing.JPanel btn_Verificar;
     private javax.swing.JPanel btn_ingresar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -268,5 +310,9 @@ public class Prestamos extends javax.swing.JFrame {
     private javax.swing.JTable tabla_prestamos;
     private javax.swing.JTextField txt_codigo;
     private javax.swing.JTextField txt_nombre;
+    private javax.swing.JLabel volver1;
     // End of variables declaration//GEN-END:variables
+
+     
+    
 }
