@@ -64,7 +64,7 @@ public class Prestamos extends javax.swing.JFrame {
         tabla_prestamos = new javax.swing.JTable();
         btn_Verificar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        btn_ingresar1 = new javax.swing.JPanel();
+        btn_prestamo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         volver1 = new javax.swing.JLabel();
 
@@ -163,19 +163,19 @@ public class Prestamos extends javax.swing.JFrame {
 
         jPanel1.add(btn_Verificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 200, 40));
 
-        btn_ingresar1.setBackground(new java.awt.Color(255, 255, 255));
-        btn_ingresar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_prestamo.setBackground(new java.awt.Color(255, 255, 255));
+        btn_prestamo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_ingresar1MouseClicked(evt);
+                btn_prestamoMouseClicked(evt);
             }
         });
-        btn_ingresar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btn_prestamo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Nuevo Prestamo");
-        btn_ingresar1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+        btn_prestamo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
 
-        jPanel1.add(btn_ingresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 200, 40));
+        jPanel1.add(btn_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 200, 40));
 
         volver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Back_64px.png"))); // NOI18N
         volver1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,8 +216,9 @@ public class Prestamos extends javax.swing.JFrame {
             } 
     }//GEN-LAST:event_txt_nombreKeyPressed
 
-    private void btn_ingresar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresar1MouseClicked
+    private void btn_prestamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prestamoMouseClicked
         // TODO add your handling code here:
+        usuarios usuario= new usuarios();
         if ( txt_nombre.getText() == "" || botonSeleccionado() == ""){
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_nombre.requestFocus();
@@ -230,7 +231,13 @@ public class Prestamos extends javax.swing.JFrame {
             txt_nombre.setText("");
             txt_nombre.requestFocus();
         }
-    }//GEN-LAST:event_btn_ingresar1MouseClicked
+        for (int i = 0; i < 10; i++) {
+          
+                
+            
+            
+        }
+    }//GEN-LAST:event_btn_prestamoMouseClicked
 
     private void volver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volver1MouseClicked
         // TODO add your handling code here:
@@ -294,7 +301,7 @@ public class Prestamos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_Verificar;
-    private javax.swing.JPanel btn_ingresar1;
+    private javax.swing.JPanel btn_prestamo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
