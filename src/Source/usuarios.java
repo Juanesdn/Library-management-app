@@ -67,6 +67,7 @@ public class usuarios extends javax.swing.JFrame {
         radbtn_empresa = new javax.swing.JRadioButton();
         btn_guardar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        volver = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,7 +93,7 @@ public class usuarios extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Usuarios registrados");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 850, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 740, 50));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,6 +190,14 @@ public class usuarios extends javax.swing.JFrame {
 
         jPanel1.add(btn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 200, 40));
 
+        volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Back_64px.png"))); // NOI18N
+        volver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                volverMouseClicked(evt);
+            }
+        });
+        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 50));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 620));
 
         pack();
@@ -279,6 +288,14 @@ public class usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private void volverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseClicked
+        // TODO add your handling code here:
+        home menu = new home();
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_volverMouseClicked
+
     private String generarCodigo() {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder cod = new StringBuilder();
@@ -357,5 +374,6 @@ public class usuarios extends javax.swing.JFrame {
     private javax.swing.JRadioButton radbtn_persona;
     private javax.swing.JTable tabla_usuarios;
     private javax.swing.JTextField txt_usuario;
+    private javax.swing.JLabel volver;
     // End of variables declaration//GEN-END:variables
 }

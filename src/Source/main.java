@@ -49,7 +49,7 @@ public class main extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         contraseña = new javax.swing.JPasswordField();
         usuario = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        btn_ingresar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -133,16 +133,16 @@ public class main extends javax.swing.JFrame {
         });
         jPanel2.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 200, 30));
 
-        jLabel1.setBackground(new java.awt.Color(97, 212, 195));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ingresar");
-        jLabel1.setOpaque(true);
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_ingresar.setBackground(new java.awt.Color(97, 212, 195));
+        btn_ingresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_ingresar.setText("Ingresar");
+        btn_ingresar.setOpaque(true);
+        btn_ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                btn_ingresarMouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 100, 40));
+        jPanel2.add(btn_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 100, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, -1));
 
@@ -168,7 +168,7 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usuarioActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void btn_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMouseClicked
         // TODO add your handling code here:
         char [] password = contraseña.getPassword();
         
@@ -183,7 +183,7 @@ public class main extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
         }
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_btn_ingresarMouseClicked
 
     private void usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyPressed
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
@@ -193,7 +193,6 @@ public class main extends javax.swing.JFrame {
 
     private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jLabel1.requestFocus();
         }
     }//GEN-LAST:event_contraseñaKeyPressed
 
@@ -233,8 +232,8 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_ingresar;
     private javax.swing.JPasswordField contraseña;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
