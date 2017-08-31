@@ -39,7 +39,7 @@ public class home extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        btn_prestamos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,12 +121,17 @@ public class home extends javax.swing.JFrame {
         jLabel6.setText("Prestamos");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 160, -1));
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prestamosIcon.png"))); // NOI18N
-        jLabel7.setOpaque(true);
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 110));
+        btn_prestamos.setBackground(new java.awt.Color(255, 255, 255));
+        btn_prestamos.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        btn_prestamos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_prestamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/prestamosIcon.png"))); // NOI18N
+        btn_prestamos.setOpaque(true);
+        btn_prestamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_prestamosMouseClicked(evt);
+            }
+        });
+        jPanel5.add(btn_prestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 110));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 160, 150));
 
@@ -158,6 +163,14 @@ public class home extends javax.swing.JFrame {
         transaccion.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void btn_prestamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prestamosMouseClicked
+        // TODO add your handling code here:
+        Prestamos prestar = new Prestamos();
+        prestar.setVisible(true);
+        prestar.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btn_prestamosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -195,6 +208,7 @@ public class home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_prestamos;
     private javax.swing.JLabel btn_registro1;
     private javax.swing.JLabel btn_usuarios;
     private javax.swing.JLabel jLabel1;
@@ -202,7 +216,6 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
