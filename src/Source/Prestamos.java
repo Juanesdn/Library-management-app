@@ -219,7 +219,7 @@ public class Prestamos extends javax.swing.JFrame {
     private void btn_prestamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prestamoMouseClicked
         // TODO add your handling code here:
         usuarios usuario= new usuarios();
-        if ( txt_nombre.getText() == "" || botonSeleccionado() == ""){
+        /**if ( txt_nombre.getText() == "" || botonSeleccionado() == ""){
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_nombre.requestFocus();
         }else {
@@ -235,7 +235,7 @@ public class Prestamos extends javax.swing.JFrame {
                 
         }
             
-        }
+        }*/
     }//GEN-LAST:event_btn_prestamoMouseClicked
 
     private void volver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volver1MouseClicked
