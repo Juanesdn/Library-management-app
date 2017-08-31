@@ -21,11 +21,12 @@ public class Transacciones extends javax.swing.JFrame {
      */
     
     public static ArrayList<String> nombre_editorial = new ArrayList<String>();
-    public static ArrayList<Integer> codigo_editorial = new ArrayList<Integer>();
+    public static ArrayList<String> codigo_editorial = new ArrayList<String>();
     public static ArrayList<String> nombre_autor = new ArrayList<String>();
-    public static ArrayList<Integer> codigo_autor = new ArrayList<Integer>();
+    public static ArrayList<String> codigo_autor = new ArrayList<String>();
+    public static String cod_editorial;
     public static boolean nuevoDato = true;
-    String col[] = {"Nombre", "Precio", "Tipo", "Editorial", "Autor", "Estado", "Edad", "Transaccion", "Traslado"};
+    String col[] = {"Nombre", "ISBN", "Precio", "Tipo", "Editorial", "Autor", "Estado", "Edad", "Transaccion", "Traslado"};
     DefaultTableModel modelo = new DefaultTableModel(col, 0);
     
             
@@ -33,27 +34,7 @@ public class Transacciones extends javax.swing.JFrame {
         initComponents();
         
         tablaLibros.setModel(modelo);
-        
-        if (nuevoDato){
-            for (int i = 0; i < AñadirTexto.nombre_texto.size(); i++) {
-            String nombre = AñadirTexto.nombre_texto.get(i);
-            int precio = AñadirTexto.precio_texto.get(i);
-            String tipoTexto = AñadirTexto.tipo_texto.get(i);
-            String edit = AñadirTexto.editorial.get(i);
-            String aut = AñadirTexto.autor.get(i);
-            String estadoTexto = AñadirTexto.estado.get(i);
-            int edad = AñadirTexto.edad_texto.get(i);
-            String tipoTransaccion = AñadirTexto.tipo_transaccion.get(i);
-            String trasladar = AñadirTexto.traslado.get(i);
-            
-            Object[] datos = {nombre, precio, tipoTexto, edit, aut, estadoTexto, edad, tipoTransaccion, trasladar};
-            
-            modelo.addRow(datos);
-            nuevoDato = false;
-            }
-        }
-        
-        
+                    
     }
 
     /**
@@ -75,6 +56,8 @@ public class Transacciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaLibros = new javax.swing.JTable();
         volver = new javax.swing.JLabel();
+        btn_actualizarTabla = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,7 +120,7 @@ public class Transacciones extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaLibros);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 680, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 970, -1));
 
         volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Back_64px.png"))); // NOI18N
         volver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,7 +130,21 @@ public class Transacciones extends javax.swing.JFrame {
         });
         jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 460));
+        btn_actualizarTabla.setBackground(new java.awt.Color(255, 255, 255));
+        btn_actualizarTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_actualizarTablaMouseClicked(evt);
+            }
+        });
+        btn_actualizarTabla.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Actualizar tabla");
+        btn_actualizarTabla.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 20));
+
+        jPanel1.add(btn_actualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 170, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,19 +154,20 @@ public class Transacciones extends javax.swing.JFrame {
         AñadirTexto añadir = new AñadirTexto();
         añadir.setVisible(true);
         añadir.setLocationRelativeTo(null);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btn_añadirTextoMouseClicked
 
     private void btn_añadirEditorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_añadirEditorialMouseClicked
         // TODO add your handling code here:
         nombre_editorial.add(JOptionPane.showInputDialog("Digite el nombre de la editorial"));
-        codigo_editorial.add(Integer.parseInt(generarCodigo()));
+        cod_editorial = generarCodigo(5);
+        codigo_editorial.add(cod_editorial);
     }//GEN-LAST:event_btn_añadirEditorialMouseClicked
 
     private void btn_añadirAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_añadirAutorMouseClicked
         // TODO add your handling code here:
         nombre_autor.add(JOptionPane.showInputDialog("Digite el nombre del autor"));
-        codigo_autor.add(Integer.parseInt(generarCodigo()));
+        codigo_autor.add(generarCodigo(5));
     }//GEN-LAST:event_btn_añadirAutorMouseClicked
 
     private void volverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseClicked
@@ -180,16 +178,50 @@ public class Transacciones extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volverMouseClicked
 
-    private String generarCodigo() {
+    private void btn_actualizarTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_actualizarTablaMouseClicked
+        // TODO add your handling code here:
+        if (nuevoDato){
+            for (int i = 0; i < AñadirTexto.nombre_texto.size(); i++) {
+            String nombre = AñadirTexto.nombre_texto.get(i);
+            int precio = AñadirTexto.precio_texto.get(i);
+            String tipoTexto = AñadirTexto.tipo_texto.get(i);
+            String edit = AñadirTexto.editorial.get(i);
+            String aut = AñadirTexto.autor.get(i);
+            String estadoTexto = AñadirTexto.estado.get(i);
+            int edad = AñadirTexto.edad_texto.get(i);
+            String tipoTransaccion = AñadirTexto.tipo_transaccion.get(i);
+            String trasladar = AñadirTexto.traslado.get(i);
+            String isbn = AñadirTexto.codigo_isbn.get(i);
+            
+            Object[] datos = {nombre, isbn, precio, tipoTexto, edit, aut, estadoTexto, edad, tipoTransaccion, trasladar};
+            
+            modelo.addRow(datos);
+            nuevoDato = false;
+            }
+        }
+    }//GEN-LAST:event_btn_actualizarTablaMouseClicked
+
+    public static String generarCodigo(int tamañoCodigo) {
         String caracteres = "1234567890";
         StringBuilder cod = new StringBuilder();
         Random rnd = new Random();
-        while (cod.length() < 5) {
+        while (cod.length() < tamañoCodigo) {
             int index = (int) (rnd.nextFloat() * caracteres.length());
             cod.append(caracteres.charAt(index));
         }
         String codigo = cod.toString();
         return codigo;
+    }
+    
+    public static String retornarCodigoEditorial(String editorial){
+        String codigo = "" ;
+        for (int i = 0; i < codigo_editorial.size() ; i++) {
+            if (nombre_editorial.get(i).equals(editorial)){
+                codigo = codigo_editorial.get(i);
+            }
+        }
+        return codigo;
+        
     }
     
     /**
@@ -228,12 +260,14 @@ public class Transacciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btn_actualizarTabla;
     private javax.swing.JPanel btn_añadirAutor;
     private javax.swing.JPanel btn_añadirEditorial;
     private javax.swing.JPanel btn_añadirTexto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaLibros;

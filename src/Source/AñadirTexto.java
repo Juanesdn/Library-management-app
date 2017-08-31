@@ -30,11 +30,17 @@ public class AñadirTexto extends javax.swing.JFrame {
     public static ArrayList<Integer> edad_texto = new ArrayList<Integer>();
     public static ArrayList<String> tipo_transaccion = new ArrayList<String>();
     public static ArrayList<String> traslado = new ArrayList<String>();
+    public static ArrayList<String> codigo_libro = new ArrayList<String>();
+    public static ArrayList<String> codigo_grupo = new ArrayList<String>();
+    public static ArrayList<String> codigo_isbn = new ArrayList<String>();
     public static String[] estado_libro;
     public static int cant_libros = 0;
     public static int cant_revistas = 0;
     public static int cant_monografias = 0;
-    
+    String current;
+    String codLibro;
+    String codGrupo;
+    String codEditorial;
     Transacciones trans = new Transacciones();
              
     public AñadirTexto() {
@@ -210,15 +216,21 @@ public class AñadirTexto extends javax.swing.JFrame {
             
             if (radbtn_libro.isSelected()){
                 tipo_texto.add("Libro");
+                codigo_grupo.add("0");
                 cant_libros++;
+                codGrupo = "0";
                 
             }else if (radbtn_revista.isSelected()){
                 tipo_texto.add("Revista");
+                codigo_grupo.add("1");
                 cant_revistas++;
+                codGrupo = "1";
                 
             }else if (radbtn_monografia.isSelected()){
                 tipo_texto.add("monografia");
+                codigo_grupo.add("2");
                 cant_monografias++;
+                codGrupo = "2";
                 
             }
             
@@ -244,6 +256,14 @@ public class AñadirTexto extends javax.swing.JFrame {
                 traslado.add("No trasladar");
             }
             
+            codLibro = Transacciones.generarCodigo(3);
+            codigo_libro.add(codLibro);
+            
+            current = comboBox_editoriales.toString();
+            codEditorial = Transacciones.cod_editorial;
+            
+            codigo_isbn.add(generarISBN(codLibro, codGrupo, codEditorial));
+            
             this.dispose();
             
             trans.setVisible(true);
@@ -258,6 +278,43 @@ public class AñadirTexto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_salirMouseClicked
 
+    private String generarISBN(String codigo_libro, String codigo_grupo, String codigo_editorial ){
+        boolean encontrado = true;
+        String codigo = "";
+        int k = 0;
+        int sum = 0;
+        int cont = 10;
+        int num = 0;
+        
+        sum = Integer.parseInt(codigo_grupo) * cont;
+        cont--;
+        
+        for (int i = 0; i < codigo_editorial.length(); i++) {
+            sum = sum + (cont * codigo_editorial.charAt(i));
+            cont--;
+        }
+        
+        for (int i = 0; i < codigo_libro.length(); i++) {
+            sum = sum + (cont * codigo_libro.charAt(i));
+            cont--;
+        }
+        
+        while (encontrado){
+            if ((((sum + k) % 11) == 0)){
+                encontrado = false;
+                codigo = codigo_grupo +  codigo_editorial + codigo_libro + String.valueOf(k);
+            }else{
+                k++;
+            }
+        }
+        System.out.println(k);
+        
+        
+        
+        return codigo;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
