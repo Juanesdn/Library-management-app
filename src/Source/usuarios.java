@@ -23,7 +23,9 @@ public class usuarios extends javax.swing.JFrame {
     
     public Vector nomUsuario = new Vector();
     public Vector codUsuario = new Vector();
+    public static Vector tipoUsuario = new Vector();
     String Datos[] = new String[50];
+    String current_code;
     DefaultTableModel modelo = new DefaultTableModel();
     
     public usuarios() {
@@ -36,6 +38,16 @@ public class usuarios extends javax.swing.JFrame {
         ButtonGroup clasificacion_usuarios = new ButtonGroup();
         clasificacion_usuarios.add(radbtn_empresa);
         clasificacion_usuarios.add(radbtn_persona);
+        
+        nomUsuario.addElement("Usuario1");
+        current_code = generarCodigo();
+        codUsuario.addElement(current_code);
+        tipoUsuario.addElement("Persona");
+        
+        Datos[0] = "Usuario1";
+        Datos[1] = current_code;
+        Datos[2] = "Persona";
+        modelo.addRow(Datos);
         
         btn_guardar.setVisible(false);
     }
@@ -220,7 +232,7 @@ public class usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
  
         
-        if ( txt_usuario.getText() == "" || botonSeleccionado() == ""){
+        if ( txt_usuario.getText().equals("") || botonSeleccionado().equals("")){
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_usuario.requestFocus();
         }else {
@@ -230,6 +242,7 @@ public class usuarios extends javax.swing.JFrame {
             modelo.addRow(Datos);
             nomUsuario.addElement(txt_usuario.getText());
             codUsuario.addElement(Datos[1]);
+            tipoUsuario.addElement(botonSeleccionado());
             txt_usuario.setText("");
             txt_usuario.requestFocus();
         }

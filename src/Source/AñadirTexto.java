@@ -286,6 +286,9 @@ public class AñadirTexto extends javax.swing.JFrame {
         int cont = 10;
         int num = 0;
         
+        
+
+        
         sum = Integer.parseInt(codigo_grupo) * cont;
         cont--;
         

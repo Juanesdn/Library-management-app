@@ -27,6 +27,7 @@ public class Transacciones extends javax.swing.JFrame {
     public static String cod_editorial;
     public static boolean nuevoDato = true;
     String col[] = {"Nombre", "ISBN", "Precio", "Tipo", "Editorial", "Autor", "Estado", "Edad", "Transaccion", "Traslado"};
+    String Datos[] = new String[50];
     DefaultTableModel modelo = new DefaultTableModel(col, 0);
     
             
@@ -34,7 +35,8 @@ public class Transacciones extends javax.swing.JFrame {
         initComponents();
         
         tablaLibros.setModel(modelo);
-                    
+        
+        
     }
 
     /**
