@@ -21,11 +21,8 @@ public class usuarios extends javax.swing.JFrame {
      * Creates new form usuarios
      */
     
-    public Vector nomUsuario = new Vector();
-    public Vector codUsuario = new Vector();
-    public static Vector tipoUsuario = new Vector();
+    int cont = 0 ;
     String Datos[] = new String[50];
-    String current_code;
     DefaultTableModel modelo = new DefaultTableModel();
     
     public usuarios() {
@@ -39,17 +36,13 @@ public class usuarios extends javax.swing.JFrame {
         clasificacion_usuarios.add(radbtn_empresa);
         clasificacion_usuarios.add(radbtn_persona);
         
-        nomUsuario.addElement("Usuario1");
-        current_code = generarCodigo();
-        codUsuario.addElement(current_code);
-        tipoUsuario.addElement("Persona");
-        
-        Datos[0] = "Usuario1";
-        Datos[1] = current_code;
-        Datos[2] = "Persona";
-        modelo.addRow(Datos);
-        
         btn_guardar.setVisible(false);
+        for (int i = 0; i < cont; i++) {
+            Datos[0] = String.valueOf(variables.nomUsuario[i]);
+            Datos[1] = String.valueOf(variables.codUsuario[i]);
+            Datos[2] = String.valueOf(variables.tipoUsuario[i]);
+            modelo.addRow(Datos);
+        }
     }
 
     /**
@@ -236,13 +229,16 @@ public class usuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_usuario.requestFocus();
         }else {
-            Datos[0] = txt_usuario.getText();
-            Datos[1] = generarCodigo();
-            Datos[2] = botonSeleccionado();
-            modelo.addRow(Datos);
-            nomUsuario.addElement(txt_usuario.getText());
-            codUsuario.addElement(Datos[1]);
-            tipoUsuario.addElement(botonSeleccionado());
+            variables.nomUsuario[cont] = txt_usuario.getText();
+            variables.codUsuario[cont] = (generarCodigo());
+            variables.tipoUsuario[cont] = (botonSeleccionado());
+            cont++;
+            for (int i = 0; i < cont; i++) {
+                Datos[0] = String.valueOf(variables.nomUsuario[i]);
+                Datos[1] = String.valueOf(variables.codUsuario[i]);
+                Datos[2] = String.valueOf(variables.tipoUsuario[i]);
+                modelo.addRow(Datos);
+            }
             txt_usuario.setText("");
             txt_usuario.requestFocus();
         }
