@@ -253,10 +253,11 @@ public class usuarios extends javax.swing.JFrame {
     private void btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_modificarMouseClicked
         // TODO add your handling code here:
         int filaSeleccionada = tabla_usuarios.getSelectedRow();
-        String btn_seleccionado = tabla_usuarios.getValueAt(filaSeleccionada, 2).toString();
+        
 
         if (filaSeleccionada >= 0){
             txt_usuario.setText(tabla_usuarios.getValueAt(filaSeleccionada, 0).toString());
+            String btn_seleccionado = tabla_usuarios.getValueAt(filaSeleccionada, 2).toString();
 
             if (btn_seleccionado.equals("Persona")){
                 radbtn_persona.doClick();
@@ -298,6 +299,8 @@ public class usuarios extends javax.swing.JFrame {
             if (result == JOptionPane.YES_OPTION){
                 modelo.removeRow(filaSeleccionada);
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecciona una fila");
         }
     }//GEN-LAST:event_jPanel2MouseClicked
 
