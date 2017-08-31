@@ -223,18 +223,17 @@ public class Prestamos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_nombre.requestFocus();
         }else {
+        for (int i = 0; i < 10; i++) {
+          if(usuario.codUsuario.get(0)== cdUsuario){
             Datos[0] = txt_nombre.getText();
+            Datos[1] = String.valueOf(cdUsuario);
             Datos[2] = botonSeleccionado();
             modelo.addRow(Datos);
             nomUsuario.addElement(txt_nombre.getText());
             cdUsuario.addElement(Datos[1]);
-            txt_nombre.setText("");
-            txt_nombre.requestFocus();
-        }
-        for (int i = 0; i < 10; i++) {
-          
+          }
                 
-            
+        }
             
         }
     }//GEN-LAST:event_btn_prestamoMouseClicked
