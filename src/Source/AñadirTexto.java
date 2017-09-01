@@ -6,6 +6,7 @@
 package Source;
 
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -21,26 +22,18 @@ public class AñadirTexto extends javax.swing.JFrame {
      */
     
     // Variables Globales
-    public static ArrayList<String> nombre_texto = new ArrayList<String>();
-    public static ArrayList<Integer> precio_texto = new ArrayList<Integer>();
-    public static ArrayList<String> tipo_texto = new ArrayList<String>();
-    public static ArrayList<String> editorial = new ArrayList<String>();
-    public static ArrayList<String> autor = new ArrayList<String>();
-    public static ArrayList<String> estado = new ArrayList<String>();
-    public static ArrayList<Integer> edad_texto = new ArrayList<Integer>();
-    public static ArrayList<String> tipo_transaccion = new ArrayList<String>();
-    public static ArrayList<String> traslado = new ArrayList<String>();
-    public static ArrayList<String> codigo_libro = new ArrayList<String>();
-    public static ArrayList<String> codigo_grupo = new ArrayList<String>();
-    public static ArrayList<String> codigo_isbn = new ArrayList<String>();
     public static String[] estado_libro;
     public static int cant_libros = 0;
     public static int cant_revistas = 0;
     public static int cant_monografias = 0;
+    public static int cont_texto = 0;
     String current;
     String codLibro;
     String codGrupo;
     String codEditorial;
+    String caracteres = "1234567890";
+    StringBuilder cod = new StringBuilder();
+    Random rnd = new Random();
     Transacciones trans = new Transacciones();
              
     public AñadirTexto() {
@@ -61,9 +54,9 @@ public class AñadirTexto extends javax.swing.JFrame {
         transaccion.add(radbtn_canjeo);
         
         
-        comboBox_editoriales.setModel(new DefaultComboBoxModel(Transacciones.nombre_editorial.toArray()));
-        comboBox_autores.setModel(new DefaultComboBoxModel(Transacciones.nombre_autor.toArray()));
-        comboBox_estadoLibro.setModel(new javax.swing.DefaultComboBoxModel(estado_libro));
+        comboBox_editoriales.setModel(new DefaultComboBoxModel(variables.nombre_editorial));
+        comboBox_autores.setModel(new DefaultComboBoxModel(variables.nombre_autor));
+        comboBox_estadoLibro.setModel(new DefaultComboBoxModel(estado_libro));
     }
 
     /**
@@ -206,63 +199,109 @@ public class AñadirTexto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:  
+        boolean encontrado = true;
+        String codigo = "";
+        String codigoEditorial = "";
+        String generado = "";
+       
+        int k = 0;
+        int sum = 0;
+        int pos = 10;
+        int num = 0;
+        
         if (txt_nombreTexto.getText().equals("") || txt_precioTexto.getText().equals("") || comboBox_autores.getSelectedItem() == null || comboBox_editoriales.getSelectedItem() == null || comboBox_estadoLibro.getSelectedItem() == null  ) {
             JOptionPane.showMessageDialog(this, "Faltan algunos campos por llenar");
         }else {
             
-            nombre_texto.add(txt_nombreTexto.getText());
-            precio_texto.add(Integer.parseInt(txt_precioTexto.getText()));
+            variables.nombre_texto[cont_texto] = txt_nombreTexto.getText();
+            variables.precio_texto[cont_texto] = Double.parseDouble(txt_precioTexto.getText());
             
             if (radbtn_libro.isSelected()){
-                tipo_texto.add("Libro");
-                codigo_grupo.add("0");
+                variables.tipo_texto[cont_texto] = "Libro";
+                variables.codigo_grupo[cont_texto] = "0";
                 cant_libros++;
                 codGrupo = "0";
                 
             }else if (radbtn_revista.isSelected()){
-                tipo_texto.add("Revista");
-                codigo_grupo.add("1");
+                variables.tipo_texto[cont_texto] = "Revista";
+                variables.codigo_grupo[cont_texto] = "1";
                 cant_revistas++;
                 codGrupo = "1";
                 
             }else if (radbtn_monografia.isSelected()){
-                tipo_texto.add("monografia");
-                codigo_grupo.add("2");
+                variables.tipo_texto[cont_texto] = "monografia";
+                variables.codigo_grupo[cont_texto] = "2";
                 cant_monografias++;
                 codGrupo = "2";
                 
             }
             
-            editorial.add(String.valueOf(comboBox_editoriales.getSelectedItem()));
-            autor.add(String.valueOf(comboBox_autores.getSelectedItem()));
-            estado.add(String.valueOf(comboBox_estadoLibro.getSelectedItem()));
-            edad_texto.add((Integer) spinner_edadLibro.getValue());
+            variables.editorial[cont_texto] = String.valueOf(comboBox_editoriales.getSelectedItem());
+            current = variables.editorial[cont_texto];
+            variables.autor[cont_texto] = String.valueOf(comboBox_autores.getSelectedItem());
+            variables.estado[cont_texto] = String.valueOf(comboBox_estadoLibro.getSelectedItem());
+            variables.edad_texto[cont_texto] = ((Integer) spinner_edadLibro.getValue());
             
             if (radbtn_compra.isSelected()){
-                tipo_transaccion.add("Compra");
+                variables.tipo_transaccion[cont_texto] = "Compra";
                 
             }else if (radbtn_donacion.isSelected()){
-                tipo_transaccion.add("Donacion");
+                variables.tipo_transaccion[cont_texto] = "Donacion";
                 
             }else if (radbtn_canjeo.isSelected()){
-                tipo_transaccion.add("Canjeo");
+                variables.tipo_transaccion[cont_texto] = "Canjeo";
                 
             }
             
             if (checkBox_traslado.isSelected()){
-                traslado.add("A trasladar");
+                variables.traslado[cont_texto] = "A trasladar";
             }else {
-                traslado.add("No trasladar");
+                variables.traslado[cont_texto] = "No trasladar";
             }
             
-            codLibro = Transacciones.generarCodigo(3);
-            codigo_libro.add(codLibro);
+            while (cod.length() < 3) {
+                int index = (int) (rnd.nextFloat() * caracteres.length());
+                cod.append(caracteres.charAt(index));
+            }
+            generado = cod.toString();
             
-            current = comboBox_editoriales.toString();
-            codEditorial = Transacciones.cod_editorial;
+            codLibro = generado;
+            variables.codigo_libro[cont_texto] = codLibro;
             
-            codigo_isbn.add(generarISBN(codLibro, codGrupo, codEditorial));
+            System.out.println(variables.nombre_editorial[0]);
+            
+            for (int i = 0; i < Transacciones.cont_editorial ; i++) {
+                if (variables.nombre_editorial[i].equals(current)){
+                codigoEditorial = variables.codigo_editorial[i];
+                }
+            }
+            
+            sum = Integer.parseInt(variables.codigo_grupo[cont_texto]) * pos;
+            pos--;
+        
+            for (int i = 0; i < Transacciones.cont_editorial; i++) {
+                sum = sum + (pos * codigoEditorial.charAt(i));
+                pos--;
+            }
+        
+            for (int i = 0; i < Transacciones.cont_editorial; i++) {
+                sum = sum + (pos * codigoEditorial.charAt(i));
+                pos--;
+            }
+        
+            while (encontrado){
+                if ((((sum + k) % 11) == 0)){
+                    encontrado = false;
+                    codigo = codGrupo +  codigoEditorial + codLibro + String.valueOf(k);
+                }else{
+                    k++;
+                }
+            }
+            
+            variables.codigo_isbn[cont_texto] = codigo;
+            
+            cont_texto++;
             
             this.dispose();
             
@@ -278,44 +317,6 @@ public class AñadirTexto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_salirMouseClicked
 
-    private String generarISBN(String codigo_libro, String codigo_grupo, String codigo_editorial ){
-        boolean encontrado = true;
-        String codigo = "";
-        int k = 0;
-        int sum = 0;
-        int cont = 10;
-        int num = 0;
-        
-        
-
-        
-        sum = Integer.parseInt(codigo_grupo) * cont;
-        cont--;
-        
-        for (int i = 0; i < codigo_editorial.length(); i++) {
-            sum = sum + (cont * codigo_editorial.charAt(i));
-            cont--;
-        }
-        
-        for (int i = 0; i < codigo_libro.length(); i++) {
-            sum = sum + (cont * codigo_libro.charAt(i));
-            cont--;
-        }
-        
-        while (encontrado){
-            if ((((sum + k) % 11) == 0)){
-                encontrado = false;
-                codigo = codigo_grupo +  codigo_editorial + codigo_libro + String.valueOf(k);
-            }else{
-                k++;
-            }
-        }
-        System.out.println(k);
-        
-        
-        
-        return codigo;
-    }
     
     
     /**

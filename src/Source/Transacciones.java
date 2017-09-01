@@ -5,7 +5,6 @@
  */
 package Source;
 
-import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,22 +19,20 @@ public class Transacciones extends javax.swing.JFrame {
      * Creates new form Transacciones
      */
     
-    public static ArrayList<String> nombre_editorial = new ArrayList<String>();
-    public static ArrayList<String> codigo_editorial = new ArrayList<String>();
-    public static ArrayList<String> nombre_autor = new ArrayList<String>();
-    public static ArrayList<String> codigo_autor = new ArrayList<String>();
-    public static String cod_editorial;
     public static boolean nuevoDato = true;
     String col[] = {"Nombre", "ISBN", "Precio", "Tipo", "Editorial", "Autor", "Estado", "Edad", "Transaccion", "Traslado"};
     String Datos[] = new String[50];
     DefaultTableModel modelo = new DefaultTableModel(col, 0);
+    public static int cont_editorial = 0;
+    int cont_autores = 0;
+    int cont_libros = 0;
+    String caracteres = "1234567890";
     
             
     public Transacciones() {
         initComponents();
         
         tablaLibros.setModel(modelo);
-        
         
     }
 
@@ -160,16 +157,35 @@ public class Transacciones extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_añadirTextoMouseClicked
 
     private void btn_añadirEditorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_añadirEditorialMouseClicked
-        // TODO add your handling code here:
-        nombre_editorial.add(JOptionPane.showInputDialog("Digite el nombre de la editorial"));
-        cod_editorial = generarCodigo(5);
-        codigo_editorial.add(cod_editorial);
+        // TODO add your handling code here:    
+        StringBuilder cod = new StringBuilder();
+        Random rnd = new Random();
+        while (cod.length() < 5) {
+            int index = (int) (rnd.nextFloat() * caracteres.length());
+            cod.append(caracteres.charAt(index));
+        }
+        
+        String codigo = cod.toString();
+        
+        variables.nombre_editorial[cont_editorial] = JOptionPane.showInputDialog("Digite el nombre de la editorial");
+        variables.codigo_editorial[cont_editorial] = codigo;
+        cont_editorial++;
     }//GEN-LAST:event_btn_añadirEditorialMouseClicked
 
     private void btn_añadirAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_añadirAutorMouseClicked
         // TODO add your handling code here:
-        nombre_autor.add(JOptionPane.showInputDialog("Digite el nombre del autor"));
-        codigo_autor.add(generarCodigo(5));
+        StringBuilder cod = new StringBuilder();
+        Random rnd = new Random();
+        while (cod.length() < 5) {
+            int index = (int) (rnd.nextFloat() * caracteres.length());
+            cod.append(caracteres.charAt(index));
+        }
+        
+        String codigo = cod.toString();
+        
+        variables.nombre_autor[cont_autores] = JOptionPane.showInputDialog("Digite el nombre del autor");
+        variables.codigo_autor[cont_autores] = codigo;
+        cont_autores++;
     }//GEN-LAST:event_btn_añadirAutorMouseClicked
 
     private void volverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseClicked
@@ -183,17 +199,17 @@ public class Transacciones extends javax.swing.JFrame {
     private void btn_actualizarTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_actualizarTablaMouseClicked
         // TODO add your handling code here:
         if (nuevoDato){
-            for (int i = 0; i < AñadirTexto.nombre_texto.size(); i++) {
-            String nombre = AñadirTexto.nombre_texto.get(i);
-            int precio = AñadirTexto.precio_texto.get(i);
-            String tipoTexto = AñadirTexto.tipo_texto.get(i);
-            String edit = AñadirTexto.editorial.get(i);
-            String aut = AñadirTexto.autor.get(i);
-            String estadoTexto = AñadirTexto.estado.get(i);
-            int edad = AñadirTexto.edad_texto.get(i);
-            String tipoTransaccion = AñadirTexto.tipo_transaccion.get(i);
-            String trasladar = AñadirTexto.traslado.get(i);
-            String isbn = AñadirTexto.codigo_isbn.get(i);
+            for (int i = 0; i < AñadirTexto.cont_texto; i++) {
+            String nombre = variables.nombre_texto[i];
+            Double precio = variables.precio_texto[i];
+            String tipoTexto = variables.tipo_texto[i];
+            String edit = variables.editorial[i];
+            String aut = variables.autor[i];
+            String estadoTexto = variables.estado[i];
+            int edad = variables.edad_texto[i];
+            String tipoTransaccion = variables.tipo_transaccion[i];
+            String trasladar = variables.traslado[i];
+            String isbn = variables.codigo_isbn[i];
             
             Object[] datos = {nombre, isbn, precio, tipoTexto, edit, aut, estadoTexto, edad, tipoTransaccion, trasladar};
             
@@ -203,28 +219,7 @@ public class Transacciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_actualizarTablaMouseClicked
 
-    public static String generarCodigo(int tamañoCodigo) {
-        String caracteres = "1234567890";
-        StringBuilder cod = new StringBuilder();
-        Random rnd = new Random();
-        while (cod.length() < tamañoCodigo) {
-            int index = (int) (rnd.nextFloat() * caracteres.length());
-            cod.append(caracteres.charAt(index));
-        }
-        String codigo = cod.toString();
-        return codigo;
-    }
     
-    public static String retornarCodigoEditorial(String editorial){
-        String codigo = "" ;
-        for (int i = 0; i < codigo_editorial.size() ; i++) {
-            if (nombre_editorial.get(i).equals(editorial)){
-                codigo = codigo_editorial.get(i);
-            }
-        }
-        return codigo;
-        
-    }
     
     /**
      * @param args the command line arguments

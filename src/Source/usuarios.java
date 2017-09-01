@@ -6,7 +6,6 @@
 package Source;
 
 import java.util.Random;
-import java.util.Vector;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,12 +20,15 @@ public class usuarios extends javax.swing.JFrame {
      * Creates new form usuarios
      */
     
-    int cont = 0 ;
     String Datos[] = new String[50];
+    String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    StringBuilder cod = new StringBuilder();
+    Random rnd = new Random();
     DefaultTableModel modelo = new DefaultTableModel();
     
     public usuarios() {
         initComponents();
+        
         modelo.addColumn("Nombre");
         modelo.addColumn("Código");
         modelo.addColumn("Tipo de usuario");
@@ -37,7 +39,8 @@ public class usuarios extends javax.swing.JFrame {
         clasificacion_usuarios.add(radbtn_persona);
         
         btn_guardar.setVisible(false);
-        for (int i = 0; i < cont; i++) {
+        
+        for (int i = 0; i < variables.cont_usuarios; i++) {
             Datos[0] = String.valueOf(variables.nomUsuario[i]);
             Datos[1] = String.valueOf(variables.codUsuario[i]);
             Datos[2] = String.valueOf(variables.tipoUsuario[i]);
@@ -223,17 +226,37 @@ public class usuarios extends javax.swing.JFrame {
 
     private void btn_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMouseClicked
         // TODO add your handling code here:
- 
+        int rowCount = modelo.getRowCount();
         
-        if ( txt_usuario.getText().equals("") || botonSeleccionado().equals("")){
+        
+        String btn_seleccionado = "";
+        if (radbtn_persona.isSelected()){
+             btn_seleccionado = "Persona";
+        }else if (radbtn_empresa.isSelected()){
+            btn_seleccionado = "Empresa";
+        }
+        
+        if ( txt_usuario.getText().equals("") || btn_seleccionado.equals("")){
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_usuario.requestFocus();
         }else {
-            variables.nomUsuario[cont] = txt_usuario.getText();
-            variables.codUsuario[cont] = (generarCodigo());
-            variables.tipoUsuario[cont] = (botonSeleccionado());
-            cont++;
-            for (int i = 0; i < cont; i++) {
+            
+            while (cod.length() < 9) {
+                int index = (int) (rnd.nextFloat() * caracteres.length());
+                cod.append(caracteres.charAt(index));
+             }
+            String codigo = cod.toString();
+            
+            variables.nomUsuario[variables.cont_usuarios] = txt_usuario.getText();
+            variables.codUsuario[variables.cont_usuarios] = (codigo);
+            variables.tipoUsuario[variables.cont_usuarios] = (btn_seleccionado);
+            variables.cont_usuarios++;
+            
+            for (int i = rowCount - 1; i >= 0; i--) {
+                modelo.removeRow(i);
+            }
+            
+            for (int i = 0; i < variables.cont_usuarios; i++) {
                 Datos[0] = String.valueOf(variables.nomUsuario[i]);
                 Datos[1] = String.valueOf(variables.codUsuario[i]);
                 Datos[2] = String.valueOf(variables.tipoUsuario[i]);
@@ -273,13 +296,19 @@ public class usuarios extends javax.swing.JFrame {
     private void btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_guardarMouseClicked
         // TODO add your handling code here:
         int filaSeleccionada = tabla_usuarios.getSelectedRow();
+        String btn_seleccionado = "";
+        if (radbtn_persona.isSelected()){
+             btn_seleccionado = "Persona";
+        }else if (radbtn_empresa.isSelected()){
+            btn_seleccionado = "Empresa";
+        }
         
-        if ( txt_usuario.getText() == "" || botonSeleccionado() == ""){
+        if ( txt_usuario.getText() == "" || btn_seleccionado == ""){
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_usuario.requestFocus();
         }else {
             tabla_usuarios.setValueAt(txt_usuario.getText(),filaSeleccionada , 0);
-            tabla_usuarios.setValueAt(botonSeleccionado(), filaSeleccionada, 2);
+            tabla_usuarios.setValueAt(btn_seleccionado, filaSeleccionada, 2);
             txt_usuario.setText("");
             txt_usuario.requestFocus();
             btn_guardar.setVisible(false);
@@ -289,6 +318,7 @@ public class usuarios extends javax.swing.JFrame {
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
         int filaSeleccionada = tabla_usuarios.getSelectedRow();
+        
         
         if (filaSeleccionada >= 0){
             int result = JOptionPane.showConfirmDialog(null, "Estas seguro de borrar esta fila?", null, JOptionPane.YES_NO_OPTION);
@@ -308,28 +338,6 @@ public class usuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volverMouseClicked
 
-    private String generarCodigo() {
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder cod = new StringBuilder();
-        Random rnd = new Random();
-        while (cod.length() < 9) {
-            int index = (int) (rnd.nextFloat() * caracteres.length());
-            cod.append(caracteres.charAt(index));
-        }
-        String codigo = cod.toString();
-        return codigo;
-    }
-    
-    private String botonSeleccionado(){
-        String btn_seleccionado = "";
-        if (radbtn_persona.isSelected()){
-             btn_seleccionado = "Persona";
-        }else if (radbtn_empresa.isSelected()){
-            btn_seleccionado = "Empresa";
-        }
-        return btn_seleccionado;
-    }
-    
     
     
     /**
