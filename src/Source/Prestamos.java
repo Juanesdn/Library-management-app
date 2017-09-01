@@ -16,25 +16,34 @@ import javax.swing.table.DefaultTableModel;
  * @author Guest
  */
 public class Prestamos extends javax.swing.JFrame {
-    public Vector nomUsuario = new Vector();
-    public Vector cdUsuario = new Vector();
+    String nomUsuario[] = new String[50];
     String Datos[] = new String[50];
+    String cdUsuario[] = new String [50];
+    int prestamos [] = new int [50], encontrado =0; 
     DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form Prestamos
      */
     public Prestamos() {
         initComponents();
-        initComponents();
+        
         modelo.addColumn("Nombre");
-        modelo.addColumn("Tipo de usuario");
         modelo.addColumn("Código");
+        modelo.addColumn("Tipo de usuario");
+        modelo.addColumn("Tipo de texto");
         modelo.addColumn("Prestamos");
-        modelo.addColumn("Libros Prestados");
         ButtonGroup clasificacion_usuarios = new ButtonGroup();
         clasificacion_usuarios.add(radbtn_empresa);
-        clasificacion_usuarios.add(radbtn_persona);
+        clasificacion_usuarios.add(radbtn_monografia);
         tabla_prestamos.setModel(modelo);
+        ButtonGroup tipo_texto = new ButtonGroup();
+        tipo_texto.add(radbtn_libro);
+        tipo_texto.add(radbtn_revista);
+        tipo_texto.add(radbtn_monografia);
+        
+        for (int i = 0; i < 50; i++) {
+           prestamos[i] = 0;
+        }
         
     }
     
@@ -58,15 +67,21 @@ public class Prestamos extends javax.swing.JFrame {
         radbtn_empresa = new javax.swing.JRadioButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        txt_nombre = new javax.swing.JTextField();
         txt_codigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_prestamos = new javax.swing.JTable();
-        btn_Verificar = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         btn_prestamo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         volver1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txt_nombre1 = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        txt_texto = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        radbtn_monografia = new javax.swing.JRadioButton();
+        radbtn_libro = new javax.swing.JRadioButton();
+        radbtn_revista = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,8 +94,8 @@ public class Prestamos extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 800, 50));
 
         jLabel5.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
-        jLabel5.setText("Tipo de usuario:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 30));
+        jLabel5.setText("Tipo de texto:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, -1));
@@ -91,33 +106,17 @@ public class Prestamos extends javax.swing.JFrame {
 
         radbtn_persona.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
         radbtn_persona.setText("Persona");
-        jPanel1.add(radbtn_persona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, 30));
+        jPanel1.add(radbtn_persona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, 30));
 
         radbtn_empresa.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
         radbtn_empresa.setText("Empresa");
-        jPanel1.add(radbtn_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, 30));
+        jPanel1.add(radbtn_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 30));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 200, -1));
 
         jLabel7.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
-        jLabel7.setText("Codigo:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
-
-        txt_nombre.setBackground(new java.awt.Color(97, 212, 195));
-        txt_nombre.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
-        txt_nombre.setBorder(null);
-        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nombreActionPerformed(evt);
-            }
-        });
-        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_nombreKeyPressed(evt);
-            }
-        });
-        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
         txt_codigo.setBackground(new java.awt.Color(97, 212, 195));
         txt_codigo.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
@@ -134,34 +133,12 @@ public class Prestamos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Tipo de usuario", "Codigo", "Prestamos", "Libros"
+                "Nombre", "Tipo de usuario", "Codigo", "Prestamos"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tabla_prestamos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 480, 220));
-
-        btn_Verificar.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Verificar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_VerificarMouseClicked(evt);
-            }
-        });
-        btn_Verificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Verificar Usuario");
-        btn_Verificar.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
-
-        jPanel1.add(btn_Verificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 200, 40));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 590, 160));
 
         btn_prestamo.setBackground(new java.awt.Color(255, 255, 255));
         btn_prestamo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,7 +152,7 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel4.setText("Nuevo Prestamo");
         btn_prestamo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
 
-        jPanel1.add(btn_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 200, 40));
+        jPanel1.add(btn_prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 200, 40));
 
         volver1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Back_64px.png"))); // NOI18N
         volver1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -185,15 +162,72 @@ public class Prestamos extends javax.swing.JFrame {
         });
         jPanel1.add(volver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 50));
 
+        jLabel8.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        jLabel8.setText(" Texto:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        jLabel9.setText("Codigo:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+
+        txt_nombre1.setBackground(new java.awt.Color(97, 212, 195));
+        txt_nombre1.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
+        txt_nombre1.setBorder(null);
+        txt_nombre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombre1ActionPerformed(evt);
+            }
+        });
+        txt_nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nombre1KeyPressed(evt);
+            }
+        });
+        jPanel1.add(txt_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 30));
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 200, 10));
+
+        txt_texto.setBackground(new java.awt.Color(97, 212, 195));
+        txt_texto.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
+        txt_texto.setBorder(null);
+        txt_texto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_textoActionPerformed(evt);
+            }
+        });
+        txt_texto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_textoKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txt_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 200, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        jLabel10.setText("Tipo de usuario:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, 30));
+
+        radbtn_monografia.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
+        radbtn_monografia.setText("Monografia");
+        jPanel1.add(radbtn_monografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, 30));
+
+        radbtn_libro.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
+        radbtn_libro.setText("Libro");
+        jPanel1.add(radbtn_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, -1, 30));
+
+        radbtn_revista.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
+        radbtn_revista.setText("Revista");
+        jPanel1.add(radbtn_revista, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
 
         pack();
@@ -204,40 +238,80 @@ public class Prestamos extends javax.swing.JFrame {
        
     }//GEN-LAST:event_txt_codigoActionPerformed
 
-    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+    private void txt_textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_textoActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_txt_nombreActionPerformed
+    }//GEN-LAST:event_txt_textoActionPerformed
 
-    private void txt_nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyPressed
+    private void txt_textoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_textoKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             txt_codigo.requestFocus();    
             } 
-    }//GEN-LAST:event_txt_nombreKeyPressed
+    }//GEN-LAST:event_txt_textoKeyPressed
 
     private void btn_prestamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prestamoMouseClicked
         // TODO add your handling code here:
-        usuarios usuario= new usuarios();
-        /**if ( txt_nombre.getText() == "" || botonSeleccionado() == ""){
-            JOptionPane.showMessageDialog(this, "Llene todos los campos");
-            txt_nombre.requestFocus();
-        }else {
-        for (int i = 0; i < 10; i++) {
-          if(usuario.codUsuario.get(0)== cdUsuario){
-            Datos[0] = txt_nombre.getText();
-            Datos[1] = String.valueOf(cdUsuario);
-            Datos[2] = botonSeleccionado();
-            modelo.addRow(Datos);
-            nomUsuario.addElement(txt_nombre.getText());
-            cdUsuario.addElement(Datos[1]);
-          }
-                
+        String botonSeleccionado = "", botonSeleccionado2 = ""; 
+        int textencontrado=0, librodisponible[] = new int [50];
+        for (int i = 0; i < AñadirTexto.cont_texto; i++) {
+            librodisponible[i]=0;
         }
-            
-        }*/
+        if (radbtn_persona.isSelected()){
+             botonSeleccionado = "Persona";
+        }else{ 
+            if (radbtn_empresa.isSelected()){
+            botonSeleccionado = "Empresa";
+            }
+        }
+        if (radbtn_libro.isSelected()){
+            botonSeleccionado2 = "libro";
+        }else{
+            if (radbtn_revista.isSelected()){
+            botonSeleccionado2 = "revista";
+            }else{
+                if (radbtn_monografia.isSelected()){
+                botonSeleccionado2 = "monografia";
+                }
+            }
+        }
+        if ( "".equals(txt_texto.getText())  || "".equals(txt_codigo.getText()) || "".equals(botonSeleccionado) ||"".equals(botonSeleccionado2)){ 
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+            txt_texto.requestFocus();
+        }else {
+            for (int i = 0; i < AñadirTexto.cont_texto; i++) {
+                if (variables.nombre_texto[0].equals(txt_texto)){
+                    textencontrado=1;
+            }
+            }
+            for (int i = 0; i < 10; i++) {
+                
+            }
+            if(textencontrado == 1 && librodisponible[i]==1){
+            for (int i = 0; i < variables.cont_usuarios; i++) {
+          if(variables.codUsuario[i].equals(txt_codigo.getText()) && variables.nomUsuario.equals(txt_texto.getText())){
+              encontrado=1; 
+              Datos[0] = txt_texto.getText();
+              Datos[1] = txt_codigo.getText();
+              Datos[2] = botonSeleccionado; 
+              Datos[3] = botonSeleccionado2;
+              if (prestamos[i] == 0 || prestamos[i] == 1){
+                  prestamos[i] = prestamos[i]+1;
+                  Datos[4] = String.valueOf(prestamos[i]);
+              }else {
+                JOptionPane.showMessageDialog(this, "Capacidad de prestamos llena");
+              }
+              modelo.addRow(Datos);
+          }
+        }
+        if(encontrado==0){
+            JOptionPane.showMessageDialog(this, "Usuario no registrado");
+        }
+        }else{
+                JOptionPane.showMessageDialog(this, "Libro no disponible");
+            }
     }//GEN-LAST:event_btn_prestamoMouseClicked
-
+} 
     private void volver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volver1MouseClicked
         // TODO add your handling code here:
         home menu = new home();
@@ -246,23 +320,13 @@ public class Prestamos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volver1MouseClicked
 
-    private void btn_VerificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_VerificarMouseClicked
+    private void txt_nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre1ActionPerformed
         // TODO add your handling code here:
-        usuarios usuario =new usuarios();
-        if ( txt_nombre.getText() == "" || botonSeleccionado() == ""){
-            JOptionPane.showMessageDialog(this, "Llene todos los campos");
-            txt_nombre.requestFocus();
-        }
-    }//GEN-LAST:event_btn_VerificarMouseClicked
- private String botonSeleccionado(){
-        String btn_seleccionado = "";
-        if (radbtn_persona.isSelected()){
-             btn_seleccionado = "Persona";
-        }else if (radbtn_empresa.isSelected()){
-            btn_seleccionado = "Empresa";
-        }
-        return btn_seleccionado;
-    }
+    }//GEN-LAST:event_txt_nombre1ActionPerformed
+
+    private void txt_nombre1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombre1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombre1KeyPressed
     /**
      * @param args the command line arguments
      */
@@ -299,23 +363,29 @@ public class Prestamos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btn_Verificar;
     private javax.swing.JPanel btn_prestamo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JRadioButton radbtn_empresa;
+    private javax.swing.JRadioButton radbtn_libro;
+    private javax.swing.JRadioButton radbtn_monografia;
     private javax.swing.JRadioButton radbtn_persona;
+    private javax.swing.JRadioButton radbtn_revista;
     private javax.swing.JTable tabla_prestamos;
     private javax.swing.JTextField txt_codigo;
-    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_nombre1;
+    private javax.swing.JTextField txt_texto;
     private javax.swing.JLabel volver1;
     // End of variables declaration//GEN-END:variables
 
