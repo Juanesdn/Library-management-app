@@ -5,7 +5,6 @@
  */
 package Source;
 
-import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -269,7 +268,6 @@ public class AñadirTexto extends javax.swing.JFrame {
             codLibro = generado;
             variables.codigo_libro[cont_texto] = codLibro;
             
-            System.out.println(variables.nombre_editorial[0]);
             
             for (int i = 0; i < Transacciones.cont_editorial ; i++) {
                 if (variables.nombre_editorial[i].equals(current)){

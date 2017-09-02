@@ -33,6 +33,8 @@ public class variables {
     public static String[] codigo_libro = new String[100];
     public static String[] codigo_grupo = new String[100];
     public static String[] codigo_isbn = new String[100];
+    public static int[] pos_textoBaja = new int[100];
+    public static int cont_bajas = 0;
     
     
     // Variables Editorial y Texto

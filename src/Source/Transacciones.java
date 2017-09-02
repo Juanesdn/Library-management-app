@@ -23,6 +23,7 @@ public class Transacciones extends javax.swing.JFrame {
     String col[] = {"Nombre", "ISBN", "Precio", "Tipo", "Editorial", "Autor", "Estado", "Edad", "Transaccion", "Traslado"};
     String Datos[] = new String[50];
     DefaultTableModel modelo = new DefaultTableModel(col, 0);
+    DefaultTableModel modeloBaja = new DefaultTableModel(col, 0);
     public static int cont_editorial = 0;
     int cont_autores = 0;
     int cont_libros = 0;
@@ -33,6 +34,7 @@ public class Transacciones extends javax.swing.JFrame {
         initComponents();
         
         tablaLibros.setModel(modelo);
+        tabla_bajas.setModel(modeloBaja);
         
     }
 
@@ -57,6 +59,14 @@ public class Transacciones extends javax.swing.JFrame {
         volver = new javax.swing.JLabel();
         btn_actualizarTabla = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        btn_eliminarTexto = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_bajas = new javax.swing.JTable();
+        btn_darBaja = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,7 +86,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel1.setText("Ingresar un nuevo texto");
         btn_añadirTexto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
-        jPanel1.add(btn_añadirTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 170, 40));
+        jPanel1.add(btn_añadirTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 170, 40));
 
         btn_añadirEditorial.setBackground(new java.awt.Color(255, 255, 255));
         btn_añadirEditorial.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,7 +100,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel2.setText("Ingresar nueva editorial");
         btn_añadirEditorial.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
-        jPanel1.add(btn_añadirEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 170, 40));
+        jPanel1.add(btn_añadirEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 170, 40));
 
         btn_añadirAutor.setBackground(new java.awt.Color(255, 255, 255));
         btn_añadirAutor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,7 +114,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel3.setText("Ingresar nuevo autor");
         btn_añadirAutor.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 20));
 
-        jPanel1.add(btn_añadirAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 170, 40));
+        jPanel1.add(btn_añadirAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 170, 40));
 
         tablaLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,7 +129,7 @@ public class Transacciones extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaLibros);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 970, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 970, 260));
 
         volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_Back_64px.png"))); // NOI18N
         volver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,7 +137,7 @@ public class Transacciones extends javax.swing.JFrame {
                 volverMouseClicked(evt);
             }
         });
-        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 60, 50));
+        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 60, 50));
 
         btn_actualizarTabla.setBackground(new java.awt.Color(255, 255, 255));
         btn_actualizarTabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -141,9 +151,60 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel4.setText("Actualizar tabla");
         btn_actualizarTabla.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 20));
 
-        jPanel1.add(btn_actualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 170, 40));
+        jPanel1.add(btn_actualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 170, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, 460));
+        btn_eliminarTexto.setBackground(new java.awt.Color(204, 204, 204));
+        btn_eliminarTexto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_eliminarTextoMouseClicked(evt);
+            }
+        });
+        btn_eliminarTexto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Eliminar texto");
+        btn_eliminarTexto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 20));
+
+        jPanel1.add(btn_eliminarTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 170, 40));
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel6.setText("Textos");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
+
+        tabla_bajas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla_bajas);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 970, 280));
+
+        btn_darBaja.setBackground(new java.awt.Color(204, 204, 204));
+        btn_darBaja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_darBajaMouseClicked(evt);
+            }
+        });
+        btn_darBaja.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Dar de baja todo");
+        btn_darBaja.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 150, 20));
+
+        jPanel1.add(btn_darBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 170, 40));
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel8.setText("Sugerencias para dar de baja");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -215,9 +276,45 @@ public class Transacciones extends javax.swing.JFrame {
             
             modelo.addRow(datos);
             nuevoDato = false;
+            
+            if (estadoTexto.equals("Dañado") && edad >= 20){
+                modeloBaja.addRow(datos);
+                variables.pos_textoBaja[variables.cont_bajas] = i;
+                variables.cont_bajas++;
+            }
+            
             }
         }
     }//GEN-LAST:event_btn_actualizarTablaMouseClicked
+
+    private void btn_eliminarTextoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_eliminarTextoMouseClicked
+        // TODO add your handling code here:
+        
+        int filaSeleccionada = tablaLibros.getSelectedRow();
+        
+
+        if (filaSeleccionada >= 0){
+          int result = JOptionPane.showConfirmDialog(null, "Estas seguro de eliminar este libro?", null, JOptionPane.YES_NO_OPTION);
+           if (result == JOptionPane.YES_OPTION){
+               modelo.removeRow(filaSeleccionada);
+           }
+        }else {
+            JOptionPane.showMessageDialog(this, "Fila no seleccionada");
+        }
+    }//GEN-LAST:event_btn_eliminarTextoMouseClicked
+
+    private void btn_darBajaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_darBajaMouseClicked
+        // TODO add your handling code here:
+        
+        int result = JOptionPane.showConfirmDialog(null, "Estas seguro de dar todo de baja?", null, JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION){
+            for (int i = 0; i < variables.cont_bajas; i++) {
+            modeloBaja.removeRow(i);
+            modelo.removeRow(variables.pos_textoBaja[i]);
+            }
+        }
+        
+    }//GEN-LAST:event_btn_darBajaMouseClicked
 
     
     
@@ -261,13 +358,21 @@ public class Transacciones extends javax.swing.JFrame {
     private javax.swing.JPanel btn_añadirAutor;
     private javax.swing.JPanel btn_añadirEditorial;
     private javax.swing.JPanel btn_añadirTexto;
+    private javax.swing.JPanel btn_darBaja;
+    private javax.swing.JPanel btn_eliminarTexto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaLibros;
+    private javax.swing.JTable tabla_bajas;
     private javax.swing.JLabel volver;
     // End of variables declaration//GEN-END:variables
 }

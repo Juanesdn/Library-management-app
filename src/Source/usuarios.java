@@ -61,7 +61,7 @@ public class usuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_usuarios = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        btn_eliminar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btn_ingresar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -103,19 +103,19 @@ public class usuarios extends javax.swing.JFrame {
         jLabel1.setText("Usuarios registrados");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 740, 50));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel2MouseClicked(evt);
+                btn_eliminarMouseClicked(evt);
             }
         });
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btn_eliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Eliminar usuario");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+        btn_eliminar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 200, 40));
+        jPanel1.add(btn_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 200, 40));
 
         btn_ingresar.setBackground(new java.awt.Color(255, 255, 255));
         btn_ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -315,7 +315,7 @@ public class usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_guardarMouseClicked
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+    private void btn_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_eliminarMouseClicked
         // TODO add your handling code here:
         int filaSeleccionada = tabla_usuarios.getSelectedRow();
         
@@ -328,7 +328,7 @@ public class usuarios extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Selecciona una fila");
         }
-    }//GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_btn_eliminarMouseClicked
 
     private void volverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseClicked
         // TODO add your handling code here:
@@ -376,6 +376,7 @@ public class usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btn_eliminar;
     private javax.swing.JPanel btn_guardar;
     private javax.swing.JPanel btn_ingresar;
     private javax.swing.JPanel btn_modificar;
@@ -387,7 +388,6 @@ public class usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton radbtn_empresa;
