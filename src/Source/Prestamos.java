@@ -19,7 +19,7 @@ public class Prestamos extends javax.swing.JFrame {
     String nomUsuario[] = new String[50];
     String Datos[] = new String[50];
     String cdUsuario[] = new String [50];
-    int prestamos [] = new int [50], encontrado =0; 
+    int prestamos [] = new int [50]; 
     DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form Prestamos
@@ -41,9 +41,6 @@ public class Prestamos extends javax.swing.JFrame {
         tipo_texto.add(radbtn_revista);
         tipo_texto.add(radbtn_monografia);
         
-        for (int i = 0; i < 50; i++) {
-           prestamos[i] = 0;
-        }
         
     }
     
@@ -75,7 +72,7 @@ public class Prestamos extends javax.swing.JFrame {
         volver1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txt_nombre1 = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         txt_texto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -170,20 +167,20 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel9.setText("Codigo:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
-        txt_nombre1.setBackground(new java.awt.Color(97, 212, 195));
-        txt_nombre1.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
-        txt_nombre1.setBorder(null);
-        txt_nombre1.addActionListener(new java.awt.event.ActionListener() {
+        txt_nombre.setBackground(new java.awt.Color(97, 212, 195));
+        txt_nombre.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
+        txt_nombre.setBorder(null);
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nombre1ActionPerformed(evt);
+                txt_nombreActionPerformed(evt);
             }
         });
-        txt_nombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_nombre1KeyPressed(evt);
+                txt_nombreKeyPressed(evt);
             }
         });
-        jPanel1.add(txt_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 30));
+        jPanel1.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 200, 30));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 200, 10));
@@ -253,10 +250,7 @@ public class Prestamos extends javax.swing.JFrame {
     private void btn_prestamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prestamoMouseClicked
         // TODO add your handling code here:
         String botonSeleccionado = "", botonSeleccionado2 = ""; 
-        int textencontrado=0, librodisponible[] = new int [50];
-        for (int i = 0; i < AñadirTexto.cont_texto; i++) {
-            librodisponible[i]=0;
-        }
+        int textencontrado=0, librodisponible[] = new int [50], encontrado =0, pos=0;
         if (radbtn_persona.isSelected()){
              botonSeleccionado = "Persona";
         }else{ 
@@ -280,36 +274,46 @@ public class Prestamos extends javax.swing.JFrame {
             txt_texto.requestFocus();
         }else {
             for (int i = 0; i < AñadirTexto.cont_texto; i++) {
-                if (variables.nombre_texto[0].equals(txt_texto)){
+                if (variables.nombre_texto[i].equals(txt_texto.getText())){
                     textencontrado=1;
+                    pos=i;
+                    if(librodisponible[i]==1){
+                        JOptionPane.showMessageDialog(this, "Libro no disponible");
+                    }
+                }
+                if (txt_nombre.getText().equals(variables.nomUsuario[i]) && txt_codigo.getText().equals(variables.codUsuario[i])){
+                    encontrado = 1;
+                }
             }
-            }
-            for (int i = 0; i < 10; i++) {
-                
-            }
-            if(textencontrado == 1 && librodisponible[i]==1){
+            System.out.println("usuario "+ txt_nombre.getText()+ " "+variables.nomUsuario[0] );
+            System.out.println("codigo "+ txt_codigo.getText()+ " nuevo codigo "+ variables.codUsuario[0]);
+            if(textencontrado == 1 && librodisponible[pos] == 0 && encontrado == 1){
             for (int i = 0; i < variables.cont_usuarios; i++) {
-          if(variables.codUsuario[i].equals(txt_codigo.getText()) && variables.nomUsuario.equals(txt_texto.getText())){
-              encontrado=1; 
-              Datos[0] = txt_texto.getText();
-              Datos[1] = txt_codigo.getText();
-              Datos[2] = botonSeleccionado; 
-              Datos[3] = botonSeleccionado2;
-              if (prestamos[i] == 0 || prestamos[i] == 1){
-                  prestamos[i] = prestamos[i]+1;
+                if(txt_texto.getText().equals(variables.nombre_texto[i]) && librodisponible[i] == 0){
+                librodisponible[i]=1;
+                Datos[0] = txt_texto.getText();
+                Datos[1] = txt_codigo.getText();
+                Datos[2] = botonSeleccionado; 
+                Datos[3] = botonSeleccionado2;
+              if (prestamos[pos] == 0){
+                  prestamos[pos] = 0;
+                  prestamos[pos] = prestamos[pos] +1;
                   Datos[4] = String.valueOf(prestamos[i]);
-              }else {
-                JOptionPane.showMessageDialog(this, "Capacidad de prestamos llena");
+              }else{
+                      if(prestamos[pos] == 2){
+                          JOptionPane.showMessageDialog(this, "Capacidad de prestamos llena");
+                      }
               }
               modelo.addRow(Datos);
-          }
+            }
         }
-        if(encontrado==0){
+            }
+        if(encontrado == 0){
             JOptionPane.showMessageDialog(this, "Usuario no registrado");
         }
-        }else{
-                JOptionPane.showMessageDialog(this, "Libro no disponible");
-            }
+        if(textencontrado == 0){
+            JOptionPane.showMessageDialog(this, "Libro no disponible");
+        }     
     }//GEN-LAST:event_btn_prestamoMouseClicked
 } 
     private void volver1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volver1MouseClicked
@@ -320,13 +324,13 @@ public class Prestamos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volver1MouseClicked
 
-    private void txt_nombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre1ActionPerformed
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombre1ActionPerformed
+    }//GEN-LAST:event_txt_nombreActionPerformed
 
-    private void txt_nombre1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombre1KeyPressed
+    private void txt_nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombre1KeyPressed
+    }//GEN-LAST:event_txt_nombreKeyPressed
     /**
      * @param args the command line arguments
      */
@@ -384,7 +388,7 @@ public class Prestamos extends javax.swing.JFrame {
     private javax.swing.JRadioButton radbtn_revista;
     private javax.swing.JTable tabla_prestamos;
     private javax.swing.JTextField txt_codigo;
-    private javax.swing.JTextField txt_nombre1;
+    private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_texto;
     private javax.swing.JLabel volver1;
     // End of variables declaration//GEN-END:variables
