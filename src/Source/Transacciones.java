@@ -24,9 +24,7 @@ public class Transacciones extends javax.swing.JFrame {
     String Datos[] = new String[50];
     DefaultTableModel modelo = new DefaultTableModel(col, 0);
     DefaultTableModel modeloBaja = new DefaultTableModel(col, 0);
-    public static int cont_editorial = 0;
-    int cont_autores = 0;
-    int cont_libros = 0;
+    
     String caracteres = "1234567890";
     
             
@@ -228,9 +226,9 @@ public class Transacciones extends javax.swing.JFrame {
         
         String codigo = cod.toString();
         
-        variables.nombre_editorial[cont_editorial] = JOptionPane.showInputDialog("Digite el nombre de la editorial");
-        variables.codigo_editorial[cont_editorial] = codigo;
-        cont_editorial++;
+        variables.nombre_editorial[variables.cont_editorial] = JOptionPane.showInputDialog("Digite el nombre de la editorial");
+        variables.codigo_editorial[variables.cont_editorial] = codigo;
+        variables.cont_editorial++;
     }//GEN-LAST:event_btn_añadirEditorialMouseClicked
 
     private void btn_añadirAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_añadirAutorMouseClicked
@@ -244,9 +242,9 @@ public class Transacciones extends javax.swing.JFrame {
         
         String codigo = cod.toString();
         
-        variables.nombre_autor[cont_autores] = JOptionPane.showInputDialog("Digite el nombre del autor");
-        variables.codigo_autor[cont_autores] = codigo;
-        cont_autores++;
+        variables.nombre_autor[variables.cont_autores] = JOptionPane.showInputDialog("Digite el nombre del autor");
+        variables.codigo_autor[variables.cont_autores] = codigo;
+        variables.cont_autores++;
     }//GEN-LAST:event_btn_añadirAutorMouseClicked
 
     private void volverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volverMouseClicked
@@ -260,7 +258,7 @@ public class Transacciones extends javax.swing.JFrame {
     private void btn_actualizarTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_actualizarTablaMouseClicked
         // TODO add your handling code here:
         if (nuevoDato){
-            for (int i = 0; i < AñadirTexto.cont_texto; i++) {
+            for (int i = 0; i < variables.cont_texto; i++) {
             String nombre = variables.nombre_texto[i];
             Double precio = variables.precio_texto[i];
             String tipoTexto = variables.tipo_texto[i];
@@ -309,8 +307,35 @@ public class Transacciones extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(null, "Estas seguro de dar todo de baja?", null, JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION){
             for (int i = 0; i < variables.cont_bajas; i++) {
-            modeloBaja.removeRow(i);
-            modelo.removeRow(variables.pos_textoBaja[i]);
+                
+                variables.nombre_texto_baja[i] = tablaLibros.getValueAt(variables.pos_textoBaja[i], 0).toString();
+                variables.codigo_isbn_baja[i] = tablaLibros.getValueAt(variables.pos_textoBaja[i], 1).toString();
+                variables.precio_texto_baja[i] = (Double) tablaLibros.getValueAt(variables.pos_textoBaja[i], 2);
+                variables.tipo_texto_baja[i] = tablaLibros.getValueAt(variables.pos_textoBaja[i], 3).toString();
+                variables.editorial_baja[i] = tablaLibros.getValueAt(variables.pos_textoBaja[i], 4).toString();
+                variables.autor_baja[i] = tablaLibros.getValueAt(variables.pos_textoBaja[i], 5).toString();
+                variables.estado_baja[i] = tablaLibros.getValueAt(variables.pos_textoBaja[i], 6).toString();
+                variables.edad_baja[i] = (int) tablaLibros.getValueAt(variables.pos_textoBaja[i], 7);
+                
+                switch (variables.tipo_texto_baja[i]) {
+                    case "Libro":
+                        variables.cant_libros--;
+                        break;
+                    case "Revista":
+                        variables.cant_revistas--;
+                        break;
+                    case "Monografia":
+                        variables.cant_monografias--;
+                        break;
+                    default:
+                        break;
+                }
+                
+                modeloBaja.removeRow(i);
+                modelo.removeRow(variables.pos_textoBaja[i]);
+                variables.cont_texto--;
+                
+                
             }
         }
         

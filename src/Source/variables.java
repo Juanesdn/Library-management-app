@@ -35,12 +35,28 @@ public class variables {
     public static String[] codigo_isbn = new String[100];
     public static int[] pos_textoBaja = new int[100];
     public static int cont_bajas = 0;
+    public static int cont_editorial = 0;
+    public static int cont_autores = 0;
+    public static int cant_libros = 0;
+    public static int cant_revistas = 0;
+    public static int cant_monografias = 0;
+    public static int cont_texto = 0;
     
     
-    // Variables Editorial y Texto
+    // Variables Editorial y Autor
     public static String[] nombre_editorial = new String[100];
     public static String[] codigo_editorial = new String[100];
     public static String[] nombre_autor = new String[100];
     public static String[] codigo_autor = new String[100];
     
+    
+    // Variables texto de baja 
+    public static String[] nombre_texto_baja = new String[100];
+    public static Double[] precio_texto_baja = new Double[100];
+    public static String[] tipo_texto_baja = new String[100];
+    public static String[] editorial_baja = new String[100];
+    public static String[] autor_baja = new String[100];
+    public static String[] estado_baja = new String[100];
+    public static String[] codigo_isbn_baja = new String[100];
+    public static int[] edad_baja = new int[100];
 }

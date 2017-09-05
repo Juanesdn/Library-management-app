@@ -273,7 +273,7 @@ public class Prestamos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_texto.requestFocus();
         }else {
-            for (int i = 0; i < AñadirTexto.cont_texto; i++) {
+            for (int i = 0; i < variables.cont_texto; i++) {
                 if (variables.nombre_texto[i].equals(txt_texto.getText())){
                     textencontrado=1;
                     pos=i;

@@ -22,10 +22,7 @@ public class AñadirTexto extends javax.swing.JFrame {
     
     // Variables Globales
     public static String[] estado_libro;
-    public static int cant_libros = 0;
-    public static int cant_revistas = 0;
-    public static int cant_monografias = 0;
-    public static int cont_texto = 0;
+    
     String current;
     String codLibro;
     String codGrupo;
@@ -213,50 +210,50 @@ public class AñadirTexto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Faltan algunos campos por llenar");
         }else {
             
-            variables.nombre_texto[cont_texto] = txt_nombreTexto.getText();
-            variables.precio_texto[cont_texto] = Double.parseDouble(txt_precioTexto.getText());
+            variables.nombre_texto[variables.cont_texto] = txt_nombreTexto.getText();
+            variables.precio_texto[variables.cont_texto] = Double.parseDouble(txt_precioTexto.getText());
             
             if (radbtn_libro.isSelected()){
-                variables.tipo_texto[cont_texto] = "Libro";
-                variables.codigo_grupo[cont_texto] = "0";
-                cant_libros++;
+                variables.tipo_texto[variables.cont_texto] = "Libro";
+                variables.codigo_grupo[variables.cont_texto] = "0";
+                variables.cant_libros++;
                 codGrupo = "0";
                 
             }else if (radbtn_revista.isSelected()){
-                variables.tipo_texto[cont_texto] = "Revista";
-                variables.codigo_grupo[cont_texto] = "1";
-                cant_revistas++;
+                variables.tipo_texto[variables.cont_texto] = "Revista";
+                variables.codigo_grupo[variables.cont_texto] = "1";
+                variables.cant_revistas++;
                 codGrupo = "1";
                 
             }else if (radbtn_monografia.isSelected()){
-                variables.tipo_texto[cont_texto] = "monografia";
-                variables.codigo_grupo[cont_texto] = "2";
-                cant_monografias++;
+                variables.tipo_texto[variables.cont_texto] = "Monografia";
+                variables.codigo_grupo[variables.cont_texto] = "2";
+                variables.cant_monografias++;
                 codGrupo = "2";
                 
             }
             
-            variables.editorial[cont_texto] = String.valueOf(comboBox_editoriales.getSelectedItem());
-            current = variables.editorial[cont_texto];
-            variables.autor[cont_texto] = String.valueOf(comboBox_autores.getSelectedItem());
-            variables.estado[cont_texto] = String.valueOf(comboBox_estadoLibro.getSelectedItem());
-            variables.edad_texto[cont_texto] = ((Integer) spinner_edadLibro.getValue());
+            variables.editorial[variables.cont_texto] = String.valueOf(comboBox_editoriales.getSelectedItem());
+            current = variables.editorial[variables.cont_texto];
+            variables.autor[variables.cont_texto] = String.valueOf(comboBox_autores.getSelectedItem());
+            variables.estado[variables.cont_texto] = String.valueOf(comboBox_estadoLibro.getSelectedItem());
+            variables.edad_texto[variables.cont_texto] = ((Integer) spinner_edadLibro.getValue());
             
             if (radbtn_compra.isSelected()){
-                variables.tipo_transaccion[cont_texto] = "Compra";
+                variables.tipo_transaccion[variables.cont_texto] = "Compra";
                 
             }else if (radbtn_donacion.isSelected()){
-                variables.tipo_transaccion[cont_texto] = "Donacion";
+                variables.tipo_transaccion[variables.cont_texto] = "Donacion";
                 
             }else if (radbtn_canjeo.isSelected()){
-                variables.tipo_transaccion[cont_texto] = "Canjeo";
+                variables.tipo_transaccion[variables.cont_texto] = "Canjeo";
                 
             }
             
             if (checkBox_traslado.isSelected()){
-                variables.traslado[cont_texto] = "A trasladar";
+                variables.traslado[variables.cont_texto] = "A trasladar";
             }else {
-                variables.traslado[cont_texto] = "No trasladar";
+                variables.traslado[variables.cont_texto] = "No trasladar";
             }
             
             while (cod.length() < 3) {
@@ -266,24 +263,24 @@ public class AñadirTexto extends javax.swing.JFrame {
             generado = cod.toString();
             
             codLibro = generado;
-            variables.codigo_libro[cont_texto] = codLibro;
+            variables.codigo_libro[variables.cont_texto] = codLibro;
             
             
-            for (int i = 0; i < Transacciones.cont_editorial ; i++) {
+            for (int i = 0; i < variables.cont_editorial ; i++) {
                 if (variables.nombre_editorial[i].equals(current)){
                 codigoEditorial = variables.codigo_editorial[i];
                 }
             }
             
-            sum = Integer.parseInt(variables.codigo_grupo[cont_texto]) * pos;
+            sum = Integer.parseInt(variables.codigo_grupo[variables.cont_texto]) * pos;
             pos--;
         
-            for (int i = 0; i < Transacciones.cont_editorial; i++) {
+            for (int i = 0; i < variables.cont_editorial; i++) {
                 sum = sum + (pos * codigoEditorial.charAt(i));
                 pos--;
             }
         
-            for (int i = 0; i < Transacciones.cont_editorial; i++) {
+            for (int i = 0; i < variables.cont_editorial; i++) {
                 sum = sum + (pos * codigoEditorial.charAt(i));
                 pos--;
             }
@@ -297,9 +294,9 @@ public class AñadirTexto extends javax.swing.JFrame {
                 }
             }
             
-            variables.codigo_isbn[cont_texto] = codigo;
+            variables.codigo_isbn[variables.cont_texto] = codigo;
             
-            cont_texto++;
+            variables.cont_texto++;
             
             this.dispose();
             
