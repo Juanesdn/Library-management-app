@@ -29,6 +29,7 @@ public class Registro extends javax.swing.JFrame {
         txt_cantRevistas.setText(String.valueOf(variables.cant_revistas));
         txt_cantMonografias.setText(String.valueOf(variables.cant_monografias));
         txt_cantBajas.setText(String.valueOf(variables.cont_bajas));
+        txt_cantPrestamos.setText(String.valueOf(variables.cont_prestamos));
         
         tabla_bajas.setModel(modelo);
     }
@@ -52,12 +53,14 @@ public class Registro extends javax.swing.JFrame {
         txt_cantLibros = new javax.swing.JLabel();
         txt_cantRevistas = new javax.swing.JLabel();
         txt_cantMonografias = new javax.swing.JLabel();
+        txt_cantPrestamos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_bajas = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txt_cantBajas = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,12 +89,13 @@ public class Registro extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel4.setText("Cantidad de monografias");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
+        jLabel4.setText("Cantidad de prestamos");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
         jPanel1.add(txt_cantTextos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
         jPanel1.add(txt_cantLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
         jPanel1.add(txt_cantRevistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
-        jPanel1.add(txt_cantMonografias, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, -1, -1));
+        jPanel1.add(txt_cantMonografias, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 0, 0));
+        jPanel1.add(txt_cantPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, 0));
 
         tabla_bajas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,6 +129,10 @@ public class Registro extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, 130, 20));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 170, 30));
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel6.setText("Cantidad de monografias");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 560));
 
@@ -198,6 +206,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -206,6 +215,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel txt_cantBajas;
     private javax.swing.JLabel txt_cantLibros;
     private javax.swing.JLabel txt_cantMonografias;
+    private javax.swing.JLabel txt_cantPrestamos;
     private javax.swing.JLabel txt_cantRevistas;
     private javax.swing.JLabel txt_cantTextos;
     private javax.swing.JLabel volver1;
