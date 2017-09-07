@@ -51,6 +51,8 @@ public class Prestamos extends javax.swing.JFrame {
         txt_apellido = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_prestamos = new javax.swing.JTable();
+        btn_retornar = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         btn_prestamo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         volver1 = new javax.swing.JLabel();
@@ -106,6 +108,20 @@ public class Prestamos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabla_prestamos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 590, 160));
+
+        btn_retornar.setBackground(new java.awt.Color(255, 255, 255));
+        btn_retornar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_retornarMouseClicked(evt);
+            }
+        });
+        btn_retornar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Retornar Prestamo");
+        btn_retornar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+
+        jPanel1.add(btn_retornar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 200, 40));
 
         btn_prestamo.setBackground(new java.awt.Color(255, 255, 255));
         btn_prestamo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,10 +195,10 @@ public class Prestamos extends javax.swing.JFrame {
         btn_actualizarTabla.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Actualizar tabla");
+        jLabel5.setText("Actualizar Tabla");
         btn_actualizarTabla.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
 
-        jPanel1.add(btn_actualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 200, 40));
+        jPanel1.add(btn_actualizarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 510, 200, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,7 +236,7 @@ public class Prestamos extends javax.swing.JFrame {
         int textencontrado=0, encontrado = 0, pos= 0;
         int posUser = 0;
         
-        if ( txt_texto.getText().equals("")){ 
+        if ( txt_texto.getText().equals("") || txt_nombre.getText().equals("")){ 
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_texto.requestFocus();
             
@@ -231,7 +247,6 @@ public class Prestamos extends javax.swing.JFrame {
                     encontrado = 1;
                     posUser = i;
                     variables.tipoUsuario_prestamo[i] = variables.tipoUsuario[posUser];
-                    System.out.println("Usuario encontrado");
                 }
             }
             for (int i = 0; i < variables.cont_texto; i++) {
@@ -307,6 +322,68 @@ public class Prestamos extends javax.swing.JFrame {
         }
                 
     }//GEN-LAST:event_btn_actualizarTablaMouseClicked
+
+    private void btn_retornarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_retornarMouseClicked
+        // TODO add your handling code here:
+        int textencontrado=0, encontrado = 0, pos= 0;
+        int posUser = 0;
+        
+        if ( txt_texto.getText().equals("") || txt_nombre.getText().equals("")){ 
+            JOptionPane.showMessageDialog(this, "Llene todos los campos");
+            txt_texto.requestFocus();
+            
+        }else {
+            
+            for (int i = 0; i < variables.cont_usuarios; i++) {
+                if (txt_nombre.getText().equals(variables.nomUsuario[i]) && txt_apellido.getText().equals(variables.apellidoUsuario[i])){
+                    encontrado = 1;
+                    posUser = i;
+                    variables.tipoUsuario_prestamo[i] = variables.tipoUsuario[posUser];
+                }
+            }
+            
+            for (int i = 0; i < variables.cont_usuarios; i++) {
+                if (txt_nombre.getText().equals(variables.nomUsuario[i]) && txt_apellido.getText().equals(variables.apellidoUsuario[i])){
+                    encontrado = 1;
+                    posUser = i;
+                    variables.tipoUsuario_prestamo[i] = variables.tipoUsuario[posUser];
+                }
+            }
+            
+            for (int i = 0; i < variables.cont_texto; i++) {
+                
+                if (variables.nombre_texto[i].equals(txt_texto.getText())){
+                    textencontrado=1;
+                    pos=i;
+                }
+            }
+                
+            if(textencontrado == 1 && variables.librodisponible[pos]==1 && encontrado == 1){
+                
+                for (int i = 0; i < variables.cont_prestamos; i++) {
+                    if(txt_texto.getText().equals(variables.nombre_texto[i]) && variables.librodisponible[pos] == 1){
+                        variables.librodisponible[pos]=0;
+                        variables.nomLibro_prestamo[i] = txt_texto.getText();
+                        variables.nomUsuario_prestamo[i] = txt_apellido.getText();
+                        Datos[0] = variables.nomLibro_prestamo[i];
+                        Datos[1] = variables.nomUsuario_prestamo[i];
+                        Datos[2] = variables.tipoUsuario_prestamo[i]; 
+                        Datos[3] = variables.tipoTexto_prestamo[i];
+                        if (variables.prestamos[i] == 1){
+                            variables.prestamos[i]--;
+                            Datos[4] = String.valueOf(variables.prestamos[i]);
+                        }else{
+                            if(variables.prestamos[pos] == 2){
+                            JOptionPane.showMessageDialog(this, "Capacidad de prestamos llena");
+                            }
+                        }  
+                        modelo.addRow(Datos);
+                    }
+                    variables.cont_prestamos--;
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_retornarMouseClicked
     /**
      * @param args the command line arguments
      */
@@ -345,7 +422,9 @@ public class Prestamos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_actualizarTabla;
     private javax.swing.JPanel btn_prestamo;
+    private javax.swing.JPanel btn_retornar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
