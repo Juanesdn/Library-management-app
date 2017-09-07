@@ -289,12 +289,18 @@ public class Transacciones extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int filaSeleccionada = tablaLibros.getSelectedRow();
+        String aux;
         
 
         if (filaSeleccionada >= 0){
           int result = JOptionPane.showConfirmDialog(null, "Estas seguro de eliminar este libro?", null, JOptionPane.YES_NO_OPTION);
            if (result == JOptionPane.YES_OPTION){
                modelo.removeRow(filaSeleccionada);
+               variables.cont_texto--;           
+               for (int i = filaSeleccionada; i < variables.cont_texto; i++) {
+                   aux = variables.nombre_texto[i+1];
+                   variables.nombre_texto[i] = variables.nombre_texto[i+1]; 
+               }
            }
         }else {
             JOptionPane.showMessageDialog(this, "Fila no seleccionada");

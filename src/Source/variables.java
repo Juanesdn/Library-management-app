@@ -14,6 +14,7 @@ public class variables {
     
     // Variables usuario
     public static String[] nomUsuario = new String[100];
+    public static String[] apellidoUsuario = new String[100];
     public static String[] codUsuario = new String[100];
     public static String[] tipoUsuario = new String[100];
     public static int cont_usuarios = 0;
@@ -59,4 +60,7 @@ public class variables {
     public static String[] estado_baja = new String[100];
     public static String[] codigo_isbn_baja = new String[100];
     public static int[] edad_baja = new int[100];
+    
+    //variables prestamos
+    public static int[] librodisponible = new int[100];
 }

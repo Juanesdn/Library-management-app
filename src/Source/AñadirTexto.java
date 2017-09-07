@@ -27,8 +27,6 @@ public class AñadirTexto extends javax.swing.JFrame {
     String codLibro;
     String codGrupo;
     String codEditorial;
-    String caracteres = "1234567890";
-    StringBuilder cod = new StringBuilder();
     Random rnd = new Random();
     Transacciones trans = new Transacciones();
              
@@ -196,6 +194,8 @@ public class AñadirTexto extends javax.swing.JFrame {
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:  
+        String caracteres = "1234567890";
+        StringBuilder cod = new StringBuilder();
         boolean encontrado = true;
         String codigo = "";
         String codigoEditorial = "";

@@ -6,8 +6,6 @@
 package Source;
 
 import java.awt.event.KeyEvent;
-import java.util.Vector;
-import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,20 +25,12 @@ public class Prestamos extends javax.swing.JFrame {
     public Prestamos() {
         initComponents();
         
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Código");
+        modelo.addColumn("Nombre del libro");
+        modelo.addColumn("Nombre de la persona");
         modelo.addColumn("Tipo de usuario");
         modelo.addColumn("Tipo de texto");
         modelo.addColumn("Prestamos");
-        ButtonGroup clasificacion_usuarios = new ButtonGroup();
-        clasificacion_usuarios.add(radbtn_empresa);
-        clasificacion_usuarios.add(radbtn_monografia);
         tabla_prestamos.setModel(modelo);
-        ButtonGroup tipo_texto = new ButtonGroup();
-        tipo_texto.add(radbtn_libro);
-        tipo_texto.add(radbtn_revista);
-        tipo_texto.add(radbtn_monografia);
-        
         
     }
     
@@ -57,14 +47,11 @@ public class Prestamos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
-        radbtn_persona = new javax.swing.JRadioButton();
-        radbtn_empresa = new javax.swing.JRadioButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        txt_codigo = new javax.swing.JTextField();
+        txt_apellido = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_prestamos = new javax.swing.JTable();
         btn_prestamo = new javax.swing.JPanel();
@@ -75,10 +62,6 @@ public class Prestamos extends javax.swing.JFrame {
         txt_nombre = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         txt_texto = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        radbtn_monografia = new javax.swing.JRadioButton();
-        radbtn_libro = new javax.swing.JRadioButton();
-        radbtn_revista = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,10 +73,6 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel1.setText("Prestamos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 800, 50));
 
-        jLabel5.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
-        jLabel5.setText("Tipo de texto:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, 30));
-
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, -1));
 
@@ -101,29 +80,21 @@ public class Prestamos extends javax.swing.JFrame {
         jLabel6.setText("Nombre:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        radbtn_persona.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
-        radbtn_persona.setText("Persona");
-        jPanel1.add(radbtn_persona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, 30));
-
-        radbtn_empresa.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
-        radbtn_empresa.setText("Empresa");
-        jPanel1.add(radbtn_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 30));
-
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 200, -1));
 
         jLabel7.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
-        txt_codigo.setBackground(new java.awt.Color(97, 212, 195));
-        txt_codigo.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
-        txt_codigo.setBorder(null);
-        txt_codigo.addActionListener(new java.awt.event.ActionListener() {
+        txt_apellido.setBackground(new java.awt.Color(97, 212, 195));
+        txt_apellido.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
+        txt_apellido.setBorder(null);
+        txt_apellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_codigoActionPerformed(evt);
+                txt_apellidoActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 200, 30));
+        jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 200, 30));
 
         tabla_prestamos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,8 +135,8 @@ public class Prestamos extends javax.swing.JFrame {
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
-        jLabel9.setText("Codigo:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+        jLabel9.setText("Apellido:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         txt_nombre.setBackground(new java.awt.Color(97, 212, 195));
         txt_nombre.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
@@ -200,22 +171,6 @@ public class Prestamos extends javax.swing.JFrame {
         });
         jPanel1.add(txt_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 200, 30));
 
-        jLabel10.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
-        jLabel10.setText("Tipo de usuario:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, 30));
-
-        radbtn_monografia.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
-        radbtn_monografia.setText("Monografia");
-        jPanel1.add(radbtn_monografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, 30));
-
-        radbtn_libro.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
-        radbtn_libro.setText("Libro");
-        jPanel1.add(radbtn_libro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, -1, 30));
-
-        radbtn_revista.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
-        radbtn_revista.setText("Revista");
-        jPanel1.add(radbtn_revista, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, 30));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,10 +185,10 @@ public class Prestamos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_codigoActionPerformed
+    private void txt_apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_apellidoActionPerformed
         // TODO add your handling code here:
        
-    }//GEN-LAST:event_txt_codigoActionPerformed
+    }//GEN-LAST:event_txt_apellidoActionPerformed
 
     private void txt_textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_textoActionPerformed
         // TODO add your handling code here:
@@ -243,70 +198,59 @@ public class Prestamos extends javax.swing.JFrame {
     private void txt_textoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_textoKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            txt_codigo.requestFocus();    
+            txt_apellido.requestFocus();    
             } 
     }//GEN-LAST:event_txt_textoKeyPressed
 
     private void btn_prestamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_prestamoMouseClicked
         // TODO add your handling code here:
-        String botonSeleccionado = "", botonSeleccionado2 = ""; 
-        int textencontrado=0, librodisponible[] = new int [50], encontrado =0, pos=0;
-        if (radbtn_persona.isSelected()){
-             botonSeleccionado = "Persona";
-        }else{ 
-            if (radbtn_empresa.isSelected()){
-            botonSeleccionado = "Empresa";
-            }
-        }
-        if (radbtn_libro.isSelected()){
-            botonSeleccionado2 = "libro";
-        }else{
-            if (radbtn_revista.isSelected()){
-            botonSeleccionado2 = "revista";
-            }else{
-                if (radbtn_monografia.isSelected()){
-                botonSeleccionado2 = "monografia";
-                }
-            }
-        }
-        if ( "".equals(txt_texto.getText())  || "".equals(txt_codigo.getText()) || "".equals(botonSeleccionado) ||"".equals(botonSeleccionado2)){ 
+        int textencontrado=0, encontrado = 0, pos= 0;
+        int posUser = 0;
+        
+        if ( txt_texto.getText().equals("")){ 
             JOptionPane.showMessageDialog(this, "Llene todos los campos");
             txt_texto.requestFocus();
+            
         }else {
+            
+            for (int i = 0; i < variables.cont_usuarios; i++) {
+                if (txt_nombre.getText().equals(variables.nomUsuario[i]) && txt_apellido.getText().equals(variables.apellidoUsuario[i])){
+                    encontrado = 1;
+                    posUser = i;
+                    System.out.println("Usuario encontrado");
+                }
+            }
             for (int i = 0; i < variables.cont_texto; i++) {
+                
                 if (variables.nombre_texto[i].equals(txt_texto.getText())){
                     textencontrado=1;
                     pos=i;
-                    if(librodisponible[i]==1){
+                    System.out.println("Texto encontrado");
+                    if(variables.librodisponible[pos]==1){
                         JOptionPane.showMessageDialog(this, "Libro no disponible");
                     }
                 }
-                if (txt_nombre.getText().equals(variables.nomUsuario[i]) && txt_codigo.getText().equals(variables.codUsuario[i])){
-                    encontrado = 1;
+                
+            }
+            if(textencontrado == 1 && variables.librodisponible[pos] == 0 && encontrado == 1){
+                for (int i = 0; i < variables.cont_usuarios; i++) {
+                    if(txt_texto.getText().equals(variables.nombre_texto[i]) && variables.librodisponible[pos] == 0){
+                    variables.librodisponible[pos]=1;
+                    Datos[0] = txt_texto.getText();
+                    Datos[1] = txt_nombre.getText();
+                    Datos[2] = variables.tipoUsuario[posUser]; 
+                    Datos[3] = variables.tipo_texto[pos];
+                    if (prestamos[pos] == 0){
+                      prestamos[pos] = prestamos[pos] + 1;
+                      Datos[4] = String.valueOf(prestamos[i]);
+                    }else{
+                        if(prestamos[pos] == 2){
+                            JOptionPane.showMessageDialog(this, "Capacidad de prestamos llena");
+                        }
+                  }
+                  modelo.addRow(Datos);
+                    }
                 }
-            }
-            System.out.println("usuario "+ txt_nombre.getText()+ " "+variables.nomUsuario[0] );
-            System.out.println("codigo "+ txt_codigo.getText()+ " nuevo codigo "+ variables.codUsuario[0]);
-            if(textencontrado == 1 && librodisponible[pos] == 0 && encontrado == 1){
-            for (int i = 0; i < variables.cont_usuarios; i++) {
-                if(txt_texto.getText().equals(variables.nombre_texto[i]) && librodisponible[i] == 0){
-                librodisponible[i]=1;
-                Datos[0] = txt_texto.getText();
-                Datos[1] = txt_codigo.getText();
-                Datos[2] = botonSeleccionado; 
-                Datos[3] = botonSeleccionado2;
-              if (prestamos[pos] == 0){
-                  prestamos[pos] = 0;
-                  prestamos[pos] = prestamos[pos] +1;
-                  Datos[4] = String.valueOf(prestamos[i]);
-              }else{
-                      if(prestamos[pos] == 2){
-                          JOptionPane.showMessageDialog(this, "Capacidad de prestamos llena");
-                      }
-              }
-              modelo.addRow(Datos);
-            }
-        }
             }
         if(encontrado == 0){
             JOptionPane.showMessageDialog(this, "Usuario no registrado");
@@ -369,9 +313,7 @@ public class Prestamos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_prestamo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -381,13 +323,8 @@ public class Prestamos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JRadioButton radbtn_empresa;
-    private javax.swing.JRadioButton radbtn_libro;
-    private javax.swing.JRadioButton radbtn_monografia;
-    private javax.swing.JRadioButton radbtn_persona;
-    private javax.swing.JRadioButton radbtn_revista;
     private javax.swing.JTable tabla_prestamos;
-    private javax.swing.JTextField txt_codigo;
+    private javax.swing.JTextField txt_apellido;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_texto;
     private javax.swing.JLabel volver1;

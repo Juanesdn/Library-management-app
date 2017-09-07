@@ -21,8 +21,6 @@ public class usuarios extends javax.swing.JFrame {
      */
     
     String Datos[] = new String[50];
-    String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    StringBuilder cod = new StringBuilder();
     Random rnd = new Random();
     DefaultTableModel modelo = new DefaultTableModel();
     
@@ -30,6 +28,7 @@ public class usuarios extends javax.swing.JFrame {
         initComponents();
         
         modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
         modelo.addColumn("Código");
         modelo.addColumn("Tipo de usuario");
         tabla_usuarios.setModel(modelo);
@@ -42,8 +41,9 @@ public class usuarios extends javax.swing.JFrame {
         
         for (int i = 0; i < variables.cont_usuarios; i++) {
             Datos[0] = String.valueOf(variables.nomUsuario[i]);
-            Datos[1] = String.valueOf(variables.codUsuario[i]);
-            Datos[2] = String.valueOf(variables.tipoUsuario[i]);
+            Datos[1] = String.valueOf(variables.apellidoUsuario[i]);
+            Datos[2] = String.valueOf(variables.codUsuario[i]);
+            Datos[3] = String.valueOf(variables.tipoUsuario[i]);
             modelo.addRow(Datos);
         }
     }
@@ -76,6 +76,9 @@ public class usuarios extends javax.swing.JFrame {
         btn_guardar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         volver = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txt_apellido = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,7 +99,7 @@ public class usuarios extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla_usuarios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 850, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 850, 310));
 
         jLabel1.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -147,7 +150,7 @@ public class usuarios extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
         jLabel5.setText("Tipo de usuario:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, -1));
@@ -178,11 +181,11 @@ public class usuarios extends javax.swing.JFrame {
 
         radbtn_persona.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
         radbtn_persona.setText("Persona");
-        jPanel1.add(radbtn_persona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        jPanel1.add(radbtn_persona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
         radbtn_empresa.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 14)); // NOI18N
         radbtn_empresa.setText("Empresa");
-        jPanel1.add(radbtn_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+        jPanel1.add(radbtn_empresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
 
         btn_guardar.setBackground(new java.awt.Color(255, 255, 255));
         btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,7 +209,34 @@ public class usuarios extends javax.swing.JFrame {
         });
         jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 60, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 620));
+        jLabel8.setFont(new java.awt.Font("Tsukushi A Round Gothic", 1, 18)); // NOI18N
+        jLabel8.setText("Apellido:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+
+        txt_apellido.setBackground(new java.awt.Color(97, 212, 195));
+        txt_apellido.setFont(new java.awt.Font("Tsukushi A Round Gothic", 0, 14)); // NOI18N
+        txt_apellido.setBorder(null);
+        txt_apellido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_apellidoMouseClicked(evt);
+            }
+        });
+        txt_apellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_apellidoActionPerformed(evt);
+            }
+        });
+        txt_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_apellidoKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 200, 30));
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 200, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,6 +257,8 @@ public class usuarios extends javax.swing.JFrame {
     private void btn_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMouseClicked
         // TODO add your handling code here:
         int rowCount = modelo.getRowCount();
+        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder cod = new StringBuilder();
         
         
         String btn_seleccionado = "";
@@ -241,29 +273,68 @@ public class usuarios extends javax.swing.JFrame {
             txt_usuario.requestFocus();
         }else {
             
-            while (cod.length() < 9) {
-                int index = (int) (rnd.nextFloat() * caracteres.length());
-                cod.append(caracteres.charAt(index));
-             }
-            String codigo = cod.toString();
-            
-            variables.nomUsuario[variables.cont_usuarios] = txt_usuario.getText();
-            variables.codUsuario[variables.cont_usuarios] = (codigo);
-            variables.tipoUsuario[variables.cont_usuarios] = (btn_seleccionado);
-            variables.cont_usuarios++;
-            
-            for (int i = rowCount - 1; i >= 0; i--) {
-                modelo.removeRow(i);
+            if (btn_seleccionado == "Empresa"){
+               while (cod.length() < 9) {
+               int index = (int) (rnd.nextFloat() * caracteres.length());
+               cod.append(caracteres.charAt(index));
+               }
+               String codigo = cod.toString();
+
+               variables.nomUsuario[variables.cont_usuarios] = txt_usuario.getText();
+               variables.apellidoUsuario[variables.cont_usuarios] = "";
+               variables.codUsuario[variables.cont_usuarios] = (codigo);
+               variables.tipoUsuario[variables.cont_usuarios] = (btn_seleccionado);
+               variables.cont_usuarios++;
+
+               for (int i = rowCount - 1; i >= 0; i--) {
+                   modelo.removeRow(i);
+               }
+
+               for (int i = 0; i < variables.cont_usuarios; i++) {
+                   Datos[0] = String.valueOf(variables.nomUsuario[i]);
+                   Datos[1] = String.valueOf(variables.apellidoUsuario[i]);
+                   Datos[2] = String.valueOf(variables.codUsuario[i]);
+                   Datos[3] = String.valueOf(variables.tipoUsuario[i]);
+                   modelo.addRow(Datos);
+               }
+               txt_usuario.setText("");
+               txt_apellido.setText("");
+               txt_usuario.requestFocus();
+               
+            }else if (btn_seleccionado == "Persona" || txt_apellido.getText().equals("") || txt_usuario.getText().equals("") ){
+               while (cod.length() < 9) {
+               int index = (int) (rnd.nextFloat() * caracteres.length());
+               cod.append(caracteres.charAt(index));
+               }
+               String codigo = cod.toString();
+
+               variables.nomUsuario[variables.cont_usuarios] = txt_usuario.getText();
+               variables.apellidoUsuario[variables.cont_usuarios] = txt_apellido.getText();
+               variables.codUsuario[variables.cont_usuarios] = codigo;
+               variables.tipoUsuario[variables.cont_usuarios] = (btn_seleccionado);
+               variables.cont_usuarios++;
+
+               for (int i = rowCount - 1; i >= 0; i--) {
+                   modelo.removeRow(i);
+               }
+
+               for (int i = 0; i < variables.cont_usuarios; i++) {
+                   Datos[0] = String.valueOf(variables.nomUsuario[i]);
+                   Datos[1] = String.valueOf(variables.apellidoUsuario[i]);
+                   Datos[2] = String.valueOf(variables.codUsuario[i]);
+                   Datos[3] = String.valueOf(variables.tipoUsuario[i]);
+                   modelo.addRow(Datos);
+               }
+               txt_usuario.setText("");
+               txt_apellido.setText("");
+               txt_usuario.requestFocus();
+               
+            }else {
+                JOptionPane.showMessageDialog(this, "Llene todos los campos");
+                txt_usuario.requestFocus();
             }
             
-            for (int i = 0; i < variables.cont_usuarios; i++) {
-                Datos[0] = String.valueOf(variables.nomUsuario[i]);
-                Datos[1] = String.valueOf(variables.codUsuario[i]);
-                Datos[2] = String.valueOf(variables.tipoUsuario[i]);
-                modelo.addRow(Datos);
-            }
-            txt_usuario.setText("");
-            txt_usuario.requestFocus();
+            
         }
         
         
@@ -338,6 +409,18 @@ public class usuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_volverMouseClicked
 
+    private void txt_apellidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_apellidoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_apellidoMouseClicked
+
+    private void txt_apellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_apellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_apellidoActionPerformed
+
+    private void txt_apellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_apellidoKeyPressed
+
     
     
     /**
@@ -387,12 +470,15 @@ public class usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JRadioButton radbtn_empresa;
     private javax.swing.JRadioButton radbtn_persona;
     private javax.swing.JTable tabla_usuarios;
+    private javax.swing.JTextField txt_apellido;
     private javax.swing.JTextField txt_usuario;
     private javax.swing.JLabel volver;
     // End of variables declaration//GEN-END:variables
