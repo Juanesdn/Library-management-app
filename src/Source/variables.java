@@ -63,4 +63,10 @@ public class variables {
     
     //variables prestamos
     public static int[] librodisponible = new int[100];
+    public static String[] nomLibro_prestamo = new String[100];
+    public static String[] nomUsuario_prestamo = new String[100];
+    public static String[] tipoUsuario_prestamo = new String[100];
+    public static String[] tipoTexto_prestamo = new String[100];
+    public static int[] prestamos = new int[100]; 
+    public static int cont_prestamos = 0;
 }
